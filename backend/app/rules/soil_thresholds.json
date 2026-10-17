@@ -1,0 +1,20 @@
+{
+  "_note": "Configurable default rating ranges based on commonly used Indian Soil Health Card categories. Bands vary by state, laboratory method and crop; verify against the issuing laboratory guidance before use. Values outside plausible_min/plausible_max are treated as likely data-entry or unit errors (OUT_OF_RANGE). A null low_below/high_above means that side is not classified.",
+  "source": "configurable_default_shc_ranges_v1",
+  "stale_after_days": 730,
+  "_stale_note": "Soil Health Cards are issued on a roughly two-year cycle; older records are flagged as stale.",
+  "parameters": {
+    "pH": {"label": "pH", "unit": "", "plausible_min": 3.0, "plausible_max": 11.0, "low_below": 6.5, "high_above": 7.5, "low_text": "acidic", "high_text": "alkaline", "is_constraint": true},
+    "EC": {"label": "Electrical conductivity", "unit": "dS/m", "plausible_min": 0.0, "plausible_max": 20.0, "low_below": null, "high_above": 1.0, "high_text": "elevated salinity", "is_constraint": true},
+    "OC": {"label": "Organic carbon", "unit": "%", "plausible_min": 0.0, "plausible_max": 10.0, "low_below": 0.5, "high_above": 0.75},
+    "N": {"label": "Available nitrogen", "unit": "kg/ha", "plausible_min": 0.0, "plausible_max": 2000.0, "low_below": 280.0, "high_above": 560.0},
+    "P": {"label": "Available phosphorus", "unit": "kg/ha", "plausible_min": 0.0, "plausible_max": 500.0, "low_below": 10.0, "high_above": 25.0},
+    "K": {"label": "Available potassium", "unit": "kg/ha", "plausible_min": 0.0, "plausible_max": 3000.0, "low_below": 120.0, "high_above": 280.0},
+    "S": {"label": "Available sulphur", "unit": "ppm", "plausible_min": 0.0, "plausible_max": 500.0, "low_below": 10.0, "high_above": null},
+    "Zn": {"label": "Zinc", "unit": "ppm", "plausible_min": 0.0, "plausible_max": 100.0, "low_below": 0.6, "high_above": null},
+    "Fe": {"label": "Iron", "unit": "ppm", "plausible_min": 0.0, "plausible_max": 500.0, "low_below": 4.5, "high_above": null},
+    "Cu": {"label": "Copper", "unit": "ppm", "plausible_min": 0.0, "plausible_max": 100.0, "low_below": 0.2, "high_above": null},
+    "Mn": {"label": "Manganese", "unit": "ppm", "plausible_min": 0.0, "plausible_max": 500.0, "low_below": 2.0, "high_above": null},
+    "B": {"label": "Boron", "unit": "ppm", "plausible_min": 0.0, "plausible_max": 50.0, "low_below": 0.5, "high_above": null}
+  }
+}

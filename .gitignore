@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+.venv/
+.venv_local/
+env/
+venv/
+ENV/
+
+# Python caches & build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Frontend builds
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# Environment & Secrets (NEVER COMMIT ACTUAL SECRETS)
+.env
+.env.*
+!.env.example
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log

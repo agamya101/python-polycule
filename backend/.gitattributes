@@ -1,0 +1,4 @@
+# Keep binary and downloaded artifacts byte-exact (model checksum, raw API responses)
+*.joblib binary
+data/pilot/yavatmal/raw/** -text
+data/pilot/yavatmal/processed/** -text

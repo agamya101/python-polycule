@@ -1,0 +1,32 @@
+# Python / tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.log
+
+# Secrets and local runtime state
+.env
+*.db
+
+# Never part of this backend
+node_modules/
+dist/
+
+# Ephemeral caches (re-created automatically)
+data/cache/*
+!data/cache/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+model_artifacts/*
+!model_artifacts/.gitkeep
+
+# Large re-downloadable source file (48 MB; re-fetched by scripts/build_yavatmal_pilot.py when needed).
+# The Yavatmal extract actually used by the API is data/pilot/yavatmal/boundary.geojson (tracked).
+data/pilot/yavatmal/raw/boundary/geoBoundaries-IND-ADM2.geojson
+
+# Kept on purpose for the offline demo / cached rebuild (~22 MB total):
+#   data/pilot/yavatmal/processed/  (snapshot, timeseries, observations served by the API)
+#   data/pilot/yavatmal/model/      (pilot model, metadata, activation)
+#   data/pilot/yavatmal/reports/
+#   data/pilot/yavatmal/raw/modis/ and raw/weather/  (original API responses; allow a ~90 s offline rebuild)

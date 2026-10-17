@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "./theme/concepts.css";
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+@theme inline {
+  --color-bg: var(--fp-bg); --color-bg-alt: var(--fp-bg-alt);
+  --color-surface: var(--fp-surface); --color-surface-2: var(--fp-surface-2);
+  --color-line: var(--fp-border); --color-ink: var(--fp-ink); --color-ink-muted: var(--fp-ink-muted);
+  --color-primary: var(--fp-primary); --color-on-primary: var(--fp-on-primary);
+  --color-accent: var(--fp-accent); --color-on-accent: var(--fp-on-accent);
+  --color-success: var(--fp-success); --color-warning: var(--fp-warning); --color-danger: var(--fp-danger); --color-info: var(--fp-info);
+  --color-risk-low: var(--fp-risk-low); --color-risk-medium: var(--fp-risk-medium); --color-risk-high: var(--fp-risk-high); --color-risk-critical: var(--fp-risk-critical);
+  --font-display: var(--fp-font-display); --font-body: var(--fp-font-body); --font-mono: var(--fp-font-mono);
+  --radius-card: var(--fp-radius-card); --radius-ctl: var(--fp-radius-ctl);
+}

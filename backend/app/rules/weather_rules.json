@@ -1,0 +1,36 @@
+{
+  "_note": "Configurable weather thresholds. Defaults are illustrative engineering choices; heavy-rain bands follow India Meteorological Department 24-hour rainfall categories. These are NOT universally valid crop-damage thresholds.",
+  "features": {
+    "heat_day_tmax_c": 35.0,
+    "dry_day_precip_mm": 2.5
+  },
+  "alerts": {
+    "HEAT_STRESS": {
+      "description": "Forecast maximum temperature at or above threshold on consecutive days.",
+      "tmax_c_gte": 40.0,
+      "min_consecutive_days": 2,
+      "severity": [
+        {"value_gte": 40.0, "level": "MODERATE"},
+        {"value_gte": 43.0, "level": "HIGH"}
+      ]
+    },
+    "DRY_SPELL": {
+      "description": "Consecutive recent days with daily precipitation below threshold.",
+      "daily_precip_mm_lt": 2.5,
+      "min_days": 14,
+      "severity": [
+        {"value_gte": 14, "level": "MODERATE"},
+        {"value_gte": 21, "level": "HIGH"}
+      ]
+    },
+    "HEAVY_RAIN": {
+      "description": "Forecast daily precipitation at or above threshold.",
+      "daily_precip_mm_gte": 64.5,
+      "severity": [
+        {"value_gte": 64.5, "level": "MODERATE"},
+        {"value_gte": 115.6, "level": "HIGH"},
+        {"value_gte": 204.5, "level": "SEVERE"}
+      ]
+    }
+  }
+}

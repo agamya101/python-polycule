@@ -1,0 +1,349 @@
+{
+  "split": {
+    "train": {
+      "rows": 1874,
+      "start": "2020-12-18",
+      "end": "2024-05-08",
+      "positives": 238,
+      "locations": 30
+    },
+    "val": {
+      "rows": 526,
+      "start": "2024-06-09",
+      "end": "2025-06-26",
+      "positives": 41,
+      "locations": 30
+    },
+    "test": {
+      "rows": 631,
+      "start": "2025-07-28",
+      "end": "2026-08-29",
+      "positives": 93,
+      "locations": 30
+    },
+    "spatial_test": {
+      "rows": 125,
+      "start": "2025-08-29",
+      "end": "2026-08-29",
+      "positives": 18,
+      "locations": 6
+    },
+    "val_start": "2024-06-09",
+    "test_start": "2025-07-28",
+    "holdout_locations": [
+      "YVT_CELL_004",
+      "YVT_CELL_010",
+      "YVT_CELL_016",
+      "YVT_CELL_022",
+      "YVT_CELL_028",
+      "YVT_CELL_034"
+    ]
+  },
+  "features": [
+    "ndvi_current",
+    "ndvi_anomaly_pct",
+    "ndvi_trend",
+    "rainfall_7d",
+    "rainfall_14d",
+    "rainfall_30d",
+    "et0_7d",
+    "et0_14d",
+    "water_balance_14d",
+    "temperature_max_7d",
+    "heat_days_7d",
+    "dry_spell_length",
+    "month_sin",
+    "month_cos",
+    "observation_quality",
+    "days_since_prev_obs",
+    "ndvi_delta_prev"
+  ],
+  "validation": {
+    "heuristic_baseline": {
+      "n": 526,
+      "positives": 41,
+      "prevalence": 0.0779467680608365,
+      "threshold": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "pr_auc": 0.0730417286949046,
+      "roc_auc": 0.2337440281619311,
+      "brier": 0.12277135555555554,
+      "precision_at_10": 0.0,
+      "precision_at_25": 0.0,
+      "precision_at_50": 0.0
+    },
+    "logistic_regression": {
+      "n": 526,
+      "positives": 41,
+      "prevalence": 0.0779467680608365,
+      "threshold": 0.25,
+      "precision": 0.3888888888888889,
+      "recall": 0.34146341463414637,
+      "f1": 0.36363636363636365,
+      "pr_auc": 0.33892760723323123,
+      "roc_auc": 0.8049283379431732,
+      "brier": 0.06315827858265818,
+      "precision_at_10": 0.6,
+      "precision_at_25": 0.44,
+      "precision_at_50": 0.28
+    },
+    "random_forest": {
+      "n": 526,
+      "positives": 41,
+      "prevalence": 0.0779467680608365,
+      "threshold": 0.44999999999999996,
+      "precision": 0.358974358974359,
+      "recall": 0.34146341463414637,
+      "f1": 0.35,
+      "pr_auc": 0.24660239701482803,
+      "roc_auc": 0.7263263766658286,
+      "brier": 0.07397697366378336,
+      "precision_at_10": 0.4,
+      "precision_at_25": 0.36,
+      "precision_at_50": 0.28
+    },
+    "hist_gradient_boosting": {
+      "n": 526,
+      "positives": 41,
+      "prevalence": 0.0779467680608365,
+      "threshold": 0.35,
+      "precision": 0.2857142857142857,
+      "recall": 0.34146341463414637,
+      "f1": 0.3111111111111111,
+      "pr_auc": 0.2138724452412965,
+      "roc_auc": 0.739703293940156,
+      "brier": 0.08431933478675205,
+      "precision_at_10": 0.3,
+      "precision_at_25": 0.4,
+      "precision_at_50": 0.28
+    }
+  },
+  "test": {
+    "heuristic_baseline": {
+      "n": 631,
+      "positives": 93,
+      "prevalence": 0.1473851030110935,
+      "threshold": 0.5,
+      "precision": 0.0625,
+      "recall": 0.010752688172043012,
+      "f1": 0.01834862385321101,
+      "pr_auc": 0.14135130788745967,
+      "roc_auc": 0.3893952112563457,
+      "brier": 0.16433846945412928,
+      "precision_at_10": 0.1,
+      "precision_at_25": 0.08,
+      "precision_at_50": 0.04
+    },
+    "logistic_regression": {
+      "n": 631,
+      "positives": 93,
+      "prevalence": 0.1473851030110935,
+      "threshold": 0.25,
+      "precision": 0.28846153846153844,
+      "recall": 0.16129032258064516,
+      "f1": 0.20689655172413793,
+      "pr_auc": 0.25516850400132635,
+      "roc_auc": 0.6324299476356077,
+      "brier": 0.12242253929101068,
+      "precision_at_10": 0.6,
+      "precision_at_25": 0.36,
+      "precision_at_50": 0.28
+    },
+    "reference": {
+      "prevalence": 0.1473851030110935,
+      "brier_prevalence_oracle": 0.12566273442150286,
+      "brier_train_prevalence_forecast": 0.1260782433359889
+    }
+  },
+  "spatial_holdout_test": {
+    "heuristic_baseline": {
+      "n": 125,
+      "positives": 18,
+      "prevalence": 0.144,
+      "threshold": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "pr_auc": 0.13532979082321187,
+      "roc_auc": 0.4247144340602285,
+      "brier": 0.15593043264888892,
+      "precision_at_10": 0.0,
+      "precision_at_25": 0.08,
+      "precision_at_50": 0.06
+    },
+    "logistic_regression": {
+      "n": 125,
+      "positives": 18,
+      "prevalence": 0.144,
+      "threshold": 0.25,
+      "precision": 0.4666666666666667,
+      "recall": 0.3888888888888889,
+      "f1": 0.42424242424242425,
+      "pr_auc": 0.3920402622101199,
+      "roc_auc": 0.7331256490134994,
+      "brier": 0.10875279446018647,
+      "precision_at_10": 0.5,
+      "precision_at_25": 0.28,
+      "precision_at_50": 0.24
+    },
+    "reference": {
+      "prevalence": 0.144,
+      "brier_prevalence_oracle": 0.12326399999999998,
+      "brier_train_prevalence_forecast": 0.12355296371511977
+    }
+  },
+  "test_all_candidates_informational": {
+    "logistic_regression": {
+      "n": 631,
+      "positives": 93,
+      "prevalence": 0.1473851030110935,
+      "threshold": 0.25,
+      "precision": 0.32558139534883723,
+      "recall": 0.15053763440860216,
+      "f1": 0.20588235294117646,
+      "pr_auc": 0.26604731750149474,
+      "roc_auc": 0.6505576208178439,
+      "brier": 0.12094328109718004,
+      "precision_at_10": 0.5,
+      "precision_at_25": 0.36,
+      "precision_at_50": 0.3
+    },
+    "random_forest": {
+      "n": 631,
+      "positives": 93,
+      "prevalence": 0.1473851030110935,
+      "threshold": 0.44999999999999996,
+      "precision": 0.8125,
+      "recall": 0.13978494623655913,
+      "f1": 0.23853211009174313,
+      "pr_auc": 0.4194371427299415,
+      "roc_auc": 0.7311228364711996,
+      "brier": 0.10962381294615715,
+      "precision_at_10": 0.8,
+      "precision_at_25": 0.72,
+      "precision_at_50": 0.5
+    },
+    "hist_gradient_boosting": {
+      "n": 631,
+      "positives": 93,
+      "prevalence": 0.1473851030110935,
+      "threshold": 0.35,
+      "precision": 0.29310344827586204,
+      "recall": 0.1827956989247312,
+      "f1": 0.2251655629139073,
+      "pr_auc": 0.2847933674791205,
+      "roc_auc": 0.6428028940320583,
+      "brier": 0.1351995174675321,
+      "precision_at_10": 0.6,
+      "precision_at_25": 0.44,
+      "precision_at_50": 0.32
+    }
+  },
+  "train_prevalence": 0.12700106723585913,
+  "selected_model": "logistic_regression",
+  "decision_threshold": 0.25,
+  "gate": {
+    "passed": true,
+    "criteria": {
+      "min_test_rows": 200,
+      "min_test_positives": 30,
+      "min_pr_auc_lift_over_prevalence": 1.2,
+      "must_beat_heuristic_pr_auc": true,
+      "must_beat_prevalence_brier": true
+    },
+    "reasons": [
+      "All gate criteria met on the temporally held-out test set."
+    ],
+    "evaluated_on": "temporal test"
+  },
+  "global_feature_importance": [
+    {
+      "feature": "ndvi_anomaly_pct",
+      "importance": 0.23736,
+      "std": 0.00645
+    },
+    {
+      "feature": "rainfall_30d",
+      "importance": 0.12788,
+      "std": 0.01588
+    },
+    {
+      "feature": "et0_7d",
+      "importance": 0.08859,
+      "std": 0.04093
+    },
+    {
+      "feature": "temperature_max_7d",
+      "importance": 0.08337,
+      "std": 0.02272
+    },
+    {
+      "feature": "rainfall_7d",
+      "importance": 0.05921,
+      "std": 0.01643
+    },
+    {
+      "feature": "ndvi_current",
+      "importance": 0.04626,
+      "std": 0.01591
+    },
+    {
+      "feature": "month_cos",
+      "importance": 0.03225,
+      "std": 0.0251
+    },
+    {
+      "feature": "ndvi_trend",
+      "importance": 0.02095,
+      "std": 0.01984
+    },
+    {
+      "feature": "rainfall_14d",
+      "importance": 0.01972,
+      "std": 0.00863
+    },
+    {
+      "feature": "ndvi_delta_prev",
+      "importance": 0.01919,
+      "std": 0.00898
+    },
+    {
+      "feature": "et0_14d",
+      "importance": 0.01272,
+      "std": 0.00634
+    },
+    {
+      "feature": "water_balance_14d",
+      "importance": 0.00956,
+      "std": 0.00553
+    },
+    {
+      "feature": "days_since_prev_obs",
+      "importance": 0.00443,
+      "std": 0.00813
+    },
+    {
+      "feature": "heat_days_7d",
+      "importance": 0.00224,
+      "std": 0.0016
+    },
+    {
+      "feature": "observation_quality",
+      "importance": 0.00211,
+      "std": 0.00134
+    },
+    {
+      "feature": "dry_spell_length",
+      "importance": -0.00729,
+      "std": 0.00688
+    },
+    {
+      "feature": "month_sin",
+      "importance": -0.00981,
+      "std": 0.02271
+    }
+  ],
+  "feature_importance_method": "Permutation importance (average precision) of the selected model fitted on the training period only, evaluated on the validation period. Associational, not causal."
+}

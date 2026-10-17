@@ -1,0 +1,1733 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_001",
+    "lat": 20.5445,
+    "lon": 78.059,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4561,
+     "usable_fraction": 0.803,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.048208,
+       20.534325
+      ],
+      [
+       78.069792,
+       20.534325
+      ],
+      [
+       78.069792,
+       20.554675
+      ],
+      [
+       78.048208,
+       20.554675
+      ],
+      [
+       78.048208,
+       20.534325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_002",
+    "lat": 20.5445,
+    "lon": 78.219,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4305,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.208208,
+       20.534325
+      ],
+      [
+       78.229792,
+       20.534325
+      ],
+      [
+       78.229792,
+       20.554675
+      ],
+      [
+       78.208208,
+       20.554675
+      ],
+      [
+       78.208208,
+       20.534325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_003",
+    "lat": 20.3845,
+    "lon": 77.739,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4788,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.728219,
+       20.374325
+      ],
+      [
+       77.749781,
+       20.374325
+      ],
+      [
+       77.749781,
+       20.394675
+      ],
+      [
+       77.728219,
+       20.394675
+      ],
+      [
+       77.728219,
+       20.374325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_004",
+    "lat": 20.3845,
+    "lon": 77.899,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4014,
+     "usable_fraction": 0.843,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.888219,
+       20.374325
+      ],
+      [
+       77.909781,
+       20.374325
+      ],
+      [
+       77.909781,
+       20.394675
+      ],
+      [
+       77.888219,
+       20.394675
+      ],
+      [
+       77.888219,
+       20.374325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_005",
+    "lat": 20.3845,
+    "lon": 78.059,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4359,
+     "usable_fraction": 0.837,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.048219,
+       20.374325
+      ],
+      [
+       78.069781,
+       20.374325
+      ],
+      [
+       78.069781,
+       20.394675
+      ],
+      [
+       78.048219,
+       20.394675
+      ],
+      [
+       78.048219,
+       20.374325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_006",
+    "lat": 20.3845,
+    "lon": 78.219,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4211,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.208219,
+       20.374325
+      ],
+      [
+       78.229781,
+       20.374325
+      ],
+      [
+       78.229781,
+       20.394675
+      ],
+      [
+       78.208219,
+       20.394675
+      ],
+      [
+       78.208219,
+       20.374325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_007",
+    "lat": 20.3845,
+    "lon": 78.379,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5001,
+     "usable_fraction": 0.888,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.368219,
+       20.374325
+      ],
+      [
+       78.389781,
+       20.374325
+      ],
+      [
+       78.389781,
+       20.394675
+      ],
+      [
+       78.368219,
+       20.394675
+      ],
+      [
+       78.368219,
+       20.374325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_008",
+    "lat": 20.3845,
+    "lon": 78.539,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5008,
+     "usable_fraction": 0.826,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.528219,
+       20.374325
+      ],
+      [
+       78.549781,
+       20.374325
+      ],
+      [
+       78.549781,
+       20.394675
+      ],
+      [
+       78.528219,
+       20.394675
+      ],
+      [
+       78.528219,
+       20.374325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_009",
+    "lat": 20.2245,
+    "lon": 77.739,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.404,
+     "usable_fraction": 0.809,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.72823,
+       20.214325
+      ],
+      [
+       77.74977,
+       20.214325
+      ],
+      [
+       77.74977,
+       20.234675
+      ],
+      [
+       77.72823,
+       20.234675
+      ],
+      [
+       77.72823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_010",
+    "lat": 20.2245,
+    "lon": 77.899,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.3686,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.88823,
+       20.214325
+      ],
+      [
+       77.90977,
+       20.214325
+      ],
+      [
+       77.90977,
+       20.234675
+      ],
+      [
+       77.88823,
+       20.234675
+      ],
+      [
+       77.88823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_011",
+    "lat": 20.2245,
+    "lon": 78.059,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4153,
+     "usable_fraction": 0.809,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.04823,
+       20.214325
+      ],
+      [
+       78.06977,
+       20.214325
+      ],
+      [
+       78.06977,
+       20.234675
+      ],
+      [
+       78.04823,
+       20.234675
+      ],
+      [
+       78.04823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_012",
+    "lat": 20.2245,
+    "lon": 78.219,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4288,
+     "usable_fraction": 0.809,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.20823,
+       20.214325
+      ],
+      [
+       78.22977,
+       20.214325
+      ],
+      [
+       78.22977,
+       20.234675
+      ],
+      [
+       78.20823,
+       20.234675
+      ],
+      [
+       78.20823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_013",
+    "lat": 20.2245,
+    "lon": 78.379,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.3986,
+     "usable_fraction": 0.837,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.36823,
+       20.214325
+      ],
+      [
+       78.38977,
+       20.214325
+      ],
+      [
+       78.38977,
+       20.234675
+      ],
+      [
+       78.36823,
+       20.234675
+      ],
+      [
+       78.36823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_014",
+    "lat": 20.2245,
+    "lon": 78.539,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4574,
+     "usable_fraction": 0.831,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.52823,
+       20.214325
+      ],
+      [
+       78.54977,
+       20.214325
+      ],
+      [
+       78.54977,
+       20.234675
+      ],
+      [
+       78.52823,
+       20.234675
+      ],
+      [
+       78.52823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_015",
+    "lat": 20.2245,
+    "lon": 78.699,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4054,
+     "usable_fraction": 0.809,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.68823,
+       20.214325
+      ],
+      [
+       78.70977,
+       20.214325
+      ],
+      [
+       78.70977,
+       20.234675
+      ],
+      [
+       78.68823,
+       20.234675
+      ],
+      [
+       78.68823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_016",
+    "lat": 20.2245,
+    "lon": 78.859,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5033,
+     "usable_fraction": 0.792,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.84823,
+       20.214325
+      ],
+      [
+       78.86977,
+       20.214325
+      ],
+      [
+       78.86977,
+       20.234675
+      ],
+      [
+       78.84823,
+       20.234675
+      ],
+      [
+       78.84823,
+       20.214325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_017",
+    "lat": 20.0645,
+    "lon": 77.739,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.501,
+     "usable_fraction": 0.82,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.728241,
+       20.054325
+      ],
+      [
+       77.749759,
+       20.054325
+      ],
+      [
+       77.749759,
+       20.074675
+      ],
+      [
+       77.728241,
+       20.074675
+      ],
+      [
+       77.728241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_018",
+    "lat": 20.0645,
+    "lon": 77.899,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4957,
+     "usable_fraction": 0.826,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.888241,
+       20.054325
+      ],
+      [
+       77.909759,
+       20.054325
+      ],
+      [
+       77.909759,
+       20.074675
+      ],
+      [
+       77.888241,
+       20.074675
+      ],
+      [
+       77.888241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_019",
+    "lat": 20.0645,
+    "lon": 78.059,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5213,
+     "usable_fraction": 0.809,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.048241,
+       20.054325
+      ],
+      [
+       78.069759,
+       20.054325
+      ],
+      [
+       78.069759,
+       20.074675
+      ],
+      [
+       78.048241,
+       20.074675
+      ],
+      [
+       78.048241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_020",
+    "lat": 20.0645,
+    "lon": 78.219,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.3814,
+     "usable_fraction": 0.792,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.208241,
+       20.054325
+      ],
+      [
+       78.229759,
+       20.054325
+      ],
+      [
+       78.229759,
+       20.074675
+      ],
+      [
+       78.208241,
+       20.074675
+      ],
+      [
+       78.208241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_021",
+    "lat": 20.0645,
+    "lon": 78.379,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.341,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.368241,
+       20.054325
+      ],
+      [
+       78.389759,
+       20.054325
+      ],
+      [
+       78.389759,
+       20.074675
+      ],
+      [
+       78.368241,
+       20.074675
+      ],
+      [
+       78.368241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_022",
+    "lat": 20.0645,
+    "lon": 78.539,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.491,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.528241,
+       20.054325
+      ],
+      [
+       78.549759,
+       20.054325
+      ],
+      [
+       78.549759,
+       20.074675
+      ],
+      [
+       78.528241,
+       20.074675
+      ],
+      [
+       78.528241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_023",
+    "lat": 20.0645,
+    "lon": 78.699,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4422,
+     "usable_fraction": 0.865,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.688241,
+       20.054325
+      ],
+      [
+       78.709759,
+       20.054325
+      ],
+      [
+       78.709759,
+       20.074675
+      ],
+      [
+       78.688241,
+       20.074675
+      ],
+      [
+       78.688241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_024",
+    "lat": 20.0645,
+    "lon": 78.859,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5257,
+     "usable_fraction": 0.831,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.848241,
+       20.054325
+      ],
+      [
+       78.869759,
+       20.054325
+      ],
+      [
+       78.869759,
+       20.074675
+      ],
+      [
+       78.848241,
+       20.074675
+      ],
+      [
+       78.848241,
+       20.054325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_025",
+    "lat": 19.9045,
+    "lon": 77.419,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.3939,
+     "usable_fraction": 0.826,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.408252,
+       19.894325
+      ],
+      [
+       77.429748,
+       19.894325
+      ],
+      [
+       77.429748,
+       19.914675
+      ],
+      [
+       77.408252,
+       19.914675
+      ],
+      [
+       77.408252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_026",
+    "lat": 19.9045,
+    "lon": 77.579,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4236,
+     "usable_fraction": 0.775,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.568252,
+       19.894325
+      ],
+      [
+       77.589748,
+       19.894325
+      ],
+      [
+       77.589748,
+       19.914675
+      ],
+      [
+       77.568252,
+       19.914675
+      ],
+      [
+       77.568252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_027",
+    "lat": 19.9045,
+    "lon": 77.739,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.3812,
+     "usable_fraction": 0.831,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.728252,
+       19.894325
+      ],
+      [
+       77.749748,
+       19.894325
+      ],
+      [
+       77.749748,
+       19.914675
+      ],
+      [
+       77.728252,
+       19.914675
+      ],
+      [
+       77.728252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_028",
+    "lat": 19.9045,
+    "lon": 78.539,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4835,
+     "usable_fraction": 0.826,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.528252,
+       19.894325
+      ],
+      [
+       78.549748,
+       19.894325
+      ],
+      [
+       78.549748,
+       19.914675
+      ],
+      [
+       78.528252,
+       19.914675
+      ],
+      [
+       78.528252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_029",
+    "lat": 19.9045,
+    "lon": 78.699,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4302,
+     "usable_fraction": 0.82,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.688252,
+       19.894325
+      ],
+      [
+       78.709748,
+       19.894325
+      ],
+      [
+       78.709748,
+       19.914675
+      ],
+      [
+       78.688252,
+       19.914675
+      ],
+      [
+       78.688252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_030",
+    "lat": 19.9045,
+    "lon": 78.859,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4926,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.848252,
+       19.894325
+      ],
+      [
+       78.869748,
+       19.894325
+      ],
+      [
+       78.869748,
+       19.914675
+      ],
+      [
+       78.848252,
+       19.914675
+      ],
+      [
+       78.848252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_031",
+    "lat": 19.9045,
+    "lon": 79.019,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.4424,
+     "usable_fraction": 0.843,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       79.008252,
+       19.894325
+      ],
+      [
+       79.029748,
+       19.894325
+      ],
+      [
+       79.029748,
+       19.914675
+      ],
+      [
+       79.008252,
+       19.914675
+      ],
+      [
+       79.008252,
+       19.894325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_032",
+    "lat": 19.7445,
+    "lon": 77.579,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.481,
+     "usable_fraction": 0.854,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.568263,
+       19.734325
+      ],
+      [
+       77.589737,
+       19.734325
+      ],
+      [
+       77.589737,
+       19.754675
+      ],
+      [
+       77.568263,
+       19.754675
+      ],
+      [
+       77.568263,
+       19.734325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_033",
+    "lat": 19.7445,
+    "lon": 77.739,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5183,
+     "usable_fraction": 0.854,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.728263,
+       19.734325
+      ],
+      [
+       77.749737,
+       19.734325
+      ],
+      [
+       77.749737,
+       19.754675
+      ],
+      [
+       77.728263,
+       19.754675
+      ],
+      [
+       77.728263,
+       19.734325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_034",
+    "lat": 19.5845,
+    "lon": 77.739,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5759,
+     "usable_fraction": 0.815,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.728273,
+       19.574325
+      ],
+      [
+       77.749727,
+       19.574325
+      ],
+      [
+       77.749727,
+       19.594675
+      ],
+      [
+       77.728273,
+       19.594675
+      ],
+      [
+       77.728273,
+       19.574325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_035",
+    "lat": 19.5845,
+    "lon": 77.899,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5451,
+     "usable_fraction": 0.826,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       77.888273,
+       19.574325
+      ],
+      [
+       77.909727,
+       19.574325
+      ],
+      [
+       77.909727,
+       19.594675
+      ],
+      [
+       77.888273,
+       19.594675
+      ],
+      [
+       77.888273,
+       19.574325
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "cell_id": "YVT_CELL_036",
+    "lat": 19.5845,
+    "lon": 78.059,
+    "sampling": "MOD13Q1 3x3 pixel subset (~2.2 km square) centred on the point",
+    "source": "ORNL DAAC TESViS MOD13Q1 subset",
+    "selection_method": "regular 0.16 degree grid inside the geoBoundaries Yavatmal polygon, >= 3.0 km from the boundary, then vegetation screening",
+    "monitoring_status": "monitored",
+    "screening": {
+     "status": "monitored",
+     "median_ndvi": 0.5032,
+     "usable_fraction": 0.854,
+     "composites": 178,
+     "reasons": []
+    },
+    "is_farmer_field": false,
+    "is_demo": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       78.048273,
+       19.574325
+      ],
+      [
+       78.069727,
+       19.574325
+      ],
+      [
+       78.069727,
+       19.594675
+      ],
+      [
+       78.048273,
+       19.594675
+      ],
+      [
+       78.048273,
+       19.574325
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

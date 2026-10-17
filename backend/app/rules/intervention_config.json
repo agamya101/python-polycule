@@ -1,0 +1,37 @@
+{
+  "_note": "Transparent rule-based prioritisation. Points are engineering choices for ranking, not a model output.",
+  "points": {
+    "risk_score_multiplier": 0.5,
+    "deterioration": 15,
+    "crop_stage_sensitivity": {"HIGH": 10, "MEDIUM": 5, "LOW": 0, "UNKNOWN": 3},
+    "affected_farmers_max": 10,
+    "affected_farmers_full_at": 50,
+    "unresolved_alert_each": 4,
+    "unresolved_alert_max": 12,
+    "verification": {"CONFIRMED": 10, "INCONCLUSIVE": 3, "UNVERIFIED": 0, "VISITED": 0, "RESOLVED": -40}
+  },
+  "buckets": {"P1_IMMEDIATE_REVIEW": 70, "P2_HIGH_PRIORITY": 50, "P3_MONITOR": 25},
+  "verify_first": {
+    "_note": "Cases with weak evidence but a concerning signal are not dropped; they are routed to verification.",
+    "max_evidence_score": 40,
+    "min_risk_score": 50
+  },
+  "p1_gate": {
+    "_note": "P1 requires reasonable evidence or a confirmed field verification; otherwise the case is capped at P2.",
+    "min_evidence_score": 60
+  },
+  "crop_stage_sensitivity": {
+    "_note": "Generic stage sensitivity to moisture/heat stress. Crop-specific calendars should replace this.",
+    "flowering": "HIGH",
+    "boll formation": "HIGH",
+    "pod filling": "HIGH",
+    "grain filling": "HIGH",
+    "tillering": "MEDIUM",
+    "vegetative": "MEDIUM",
+    "grand growth": "MEDIUM",
+    "emergence": "MEDIUM",
+    "sowing": "LOW",
+    "maturity": "LOW",
+    "harvest": "LOW"
+  }
+}

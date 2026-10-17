@@ -1,0 +1,12 @@
+{
+  "_note": "Follow-up evaluation parameters. Evaluation runs whenever a new usable observation is available; no fixed revisit interval is assumed. Recovery needs more evidence than deterioration by design (escalating errs on the side of caution).",
+  "min_valid_pixel_pct": 40.0,
+  "recovery_min_delta_ndvi": 0.03,
+  "recovery_min_observations": 2,
+  "deterioration_min_delta_ndvi": -0.03,
+  "single_observation_severe_drop_ndvi": -0.08,
+  "trend_flat_band_per_10d": 0.005,
+  "contradiction_spread_ndvi": 0.15,
+  "min_days_for_not_recovering": 10,
+  "close_requires_observations": 3
+}

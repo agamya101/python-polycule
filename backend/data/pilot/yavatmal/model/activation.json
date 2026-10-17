@@ -1,0 +1,5 @@
+{
+  "enabled": true,
+  "reason": "Model passed the safety gate on the temporal test; enabled for the Yavatmal pilot only.",
+  "model_version": "yavatmal-pilot-20261018"
+}

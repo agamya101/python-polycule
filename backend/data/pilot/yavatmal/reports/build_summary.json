@@ -1,0 +1,172 @@
+{
+  "boundary": "Yavatmal",
+  "candidate_cells": 36,
+  "monitored_cells": 36,
+  "download_failures": [],
+  "composites": 6408,
+  "satellite_date_range": [
+    "2019-01-01",
+    "2026-09-14"
+  ],
+  "dataset_rows": 5280,
+  "labelled_rows": 3681,
+  "positives": 464,
+  "prevalence": 0.1261,
+  "model": {
+    "status": "AVAILABLE",
+    "available": true,
+    "validated": true,
+    "enabled_for_pilot": true,
+    "model_version": "yavatmal-pilot-20261018",
+    "reason": "Validated model installed and enabled.",
+    "evaluation_summary": {
+      "selected_model": "logistic_regression",
+      "candidates": [
+        "heuristic_baseline",
+        "logistic_regression",
+        "random_forest",
+        "hist_gradient_boosting"
+      ],
+      "gate_passed": true,
+      "gate_reasons": [
+        "All gate criteria met on the temporally held-out test set."
+      ],
+      "enabled_for_pilot": true,
+      "temporal_test": {
+        "model": {
+          "n": 631,
+          "positives": 93,
+          "prevalence": 0.1473851030110935,
+          "precision": 0.28846153846153844,
+          "recall": 0.16129032258064516,
+          "f1": 0.20689655172413793,
+          "pr_auc": 0.25516850400132635,
+          "roc_auc": 0.6324299476356077,
+          "brier": 0.12242253929101068,
+          "precision_at_10": 0.6,
+          "precision_at_25": 0.36,
+          "precision_at_50": 0.28
+        },
+        "heuristic": {
+          "n": 631,
+          "positives": 93,
+          "prevalence": 0.1473851030110935,
+          "precision": 0.0625,
+          "recall": 0.010752688172043012,
+          "f1": 0.01834862385321101,
+          "pr_auc": 0.14135130788745967,
+          "roc_auc": 0.3893952112563457,
+          "brier": 0.16433846945412928,
+          "precision_at_10": 0.1,
+          "precision_at_25": 0.08,
+          "precision_at_50": 0.04
+        },
+        "reference": {
+          "prevalence": 0.1473851030110935,
+          "brier_prevalence_oracle": 0.12566273442150286,
+          "brier_train_prevalence_forecast": 0.1260782433359889
+        }
+      },
+      "spatial_holdout_test": {
+        "model": {
+          "n": 125,
+          "positives": 18,
+          "prevalence": 0.144,
+          "precision": 0.4666666666666667,
+          "recall": 0.3888888888888889,
+          "f1": 0.42424242424242425,
+          "pr_auc": 0.3920402622101199,
+          "roc_auc": 0.7331256490134994,
+          "brier": 0.10875279446018647,
+          "precision_at_10": 0.5,
+          "precision_at_25": 0.28,
+          "precision_at_50": 0.24
+        },
+        "heuristic": {
+          "n": 125,
+          "positives": 18,
+          "prevalence": 0.144,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "pr_auc": 0.13532979082321187,
+          "roc_auc": 0.4247144340602285,
+          "brier": 0.15593043264888892,
+          "precision_at_10": 0.0,
+          "precision_at_25": 0.08,
+          "precision_at_50": 0.06
+        },
+        "reference": {
+          "prevalence": 0.144,
+          "brier_prevalence_oracle": 0.12326399999999998,
+          "brier_train_prevalence_forecast": 0.12355296371511977
+        }
+      },
+      "split": {
+        "train": {
+          "rows": 1874,
+          "start": "2020-12-18",
+          "end": "2024-05-08",
+          "positives": 238,
+          "locations": 30
+        },
+        "val": {
+          "rows": 526,
+          "start": "2024-06-09",
+          "end": "2025-06-26",
+          "positives": 41,
+          "locations": 30
+        },
+        "test": {
+          "rows": 631,
+          "start": "2025-07-28",
+          "end": "2026-08-29",
+          "positives": 93,
+          "locations": 30
+        },
+        "spatial_test": {
+          "rows": 125,
+          "start": "2025-08-29",
+          "end": "2026-08-29",
+          "positives": 18,
+          "locations": 6
+        },
+        "val_start": "2024-06-09",
+        "test_start": "2025-07-28",
+        "holdout_locations": [
+          "YVT_CELL_004",
+          "YVT_CELL_010",
+          "YVT_CELL_016",
+          "YVT_CELL_022",
+          "YVT_CELL_028",
+          "YVT_CELL_034"
+        ]
+      },
+      "caveats": [
+        "Calibration gain is marginal: Brier 0.122 vs 0.126 for a prevalence-only forecast (<5% improvement). Treat probabilities as a ranking aid, not precise risk estimates.",
+        "PR-AUC fell from 0.339 (validation) to 0.255 (temporal test): performance varies between seasons.",
+        "The heuristic baseline ranks worse than random on this label (ROC-AUC 0.39): cells already below baseline tend to recover at the next composite. Beating it is therefore a weak bar; the comparison with prevalence is the meaningful one.",
+        "The strongest feature is the current anomaly. Part of the predictive signal is regression to the mean in a noisy anomaly measure (a cell well above its baseline is more likely to fall back), not only genuine stress onset.",
+        "Discrimination on the temporal test is modest (ROC-AUC 0.63)."
+      ]
+    },
+    "operational_engine": "heuristic_v1"
+  },
+  "latest_observation_date": "2026-09-14",
+  "risk_distribution": {
+    "LOW": 0,
+    "MODERATE": 36,
+    "HIGH": 0,
+    "CRITICAL": 0,
+    "INSUFFICIENT_EVIDENCE": 0
+  },
+  "operational_kpis": {
+    "monitoring_cells_analysed": 36,
+    "cells_requiring_review": 0,
+    "cells_insufficient_evidence": 0,
+    "high_priority_cases": 0,
+    "verify_first_cases": 0,
+    "latest_observation_freshness_days": 34,
+    "note": "Operational counts only. No yield, income or loss-prevention figures are estimated."
+  }
+}

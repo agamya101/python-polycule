@@ -1,0 +1,78 @@
+{
+  "_note": "Heuristic v1 parameters. These are MVP engineering choices, not scientifically validated coefficients. Review with agronomists before operational use.",
+  "method": "heuristic_v1",
+  "weights": {
+    "vegetation": 0.4,
+    "water": 0.3,
+    "heat": 0.2,
+    "soil": 0.1
+  },
+  "vegetation": {
+    "_note": "stress = clip(-ndvi_anomaly_pct / full_stress_anomaly_pct, 0, 1). Positive anomalies give zero stress.",
+    "full_stress_anomaly_pct": 30.0
+  },
+  "water": {
+    "_note": "Water component = max of the available sub-signals. water_balance_14d = sum(precipitation) - sum(ET0); an environmental water-balance indicator, not a measurement of plant water stress.",
+    "water_balance_zero_stress_mm": 0.0,
+    "water_balance_full_stress_mm": -70.0,
+    "dry_spell_zero_stress_days": 7,
+    "dry_spell_full_stress_days": 21,
+    "ndmi_full_stress_drop": 0.1,
+    "seasonal": {
+      "_note": "Used when a past-only seasonal climatology is available (median of prior years at the same date, same location). Water stress is then scored on the deficit RELATIVE TO THE SEASONAL NORM, so a normal post-monsoon dry period is not flagged. Absolute thresholds above are the fallback.",
+      "water_balance_anomaly_zero_stress_mm": 0.0,
+      "water_balance_anomaly_full_stress_mm": -50.0,
+      "dry_spell_excess_zero_stress_days": 0,
+      "dry_spell_excess_full_stress_days": 14,
+      "min_climatology_years": 3
+    }
+  },
+  "heat": {
+    "_note": "Heat component = max of the available sub-signals.",
+    "tmax_zero_stress_c": 35.0,
+    "tmax_full_stress_c": 42.0,
+    "heat_days_full_stress": 5
+  },
+  "soil": {
+    "_note": "Only used when a soil record is marked verified. Severity per classification status; constraint parameters (pH, EC) use their own severity when abnormal.",
+    "status_severity": {
+      "NORMAL": 0.0,
+      "LOW": 0.35,
+      "HIGH": 0.1,
+      "UNKNOWN": 0.0,
+      "OUT_OF_RANGE": 0.0
+    },
+    "constraint_parameter_severity": {
+      "pH": 0.6,
+      "EC": 0.7
+    }
+  },
+  "bands": [
+    {
+      "level": "LOW",
+      "min": 0,
+      "max": 25
+    },
+    {
+      "level": "MODERATE",
+      "min": 25,
+      "max": 50
+    },
+    {
+      "level": "HIGH",
+      "min": 50,
+      "max": 75
+    },
+    {
+      "level": "CRITICAL",
+      "min": 75,
+      "max": 101
+    }
+  ],
+  "insufficient_evidence": {
+    "_note": "Risk classification is withheld when evidence quality is below this score, or when too little of the nominal weight is backed by data.",
+    "min_evidence_score": 40,
+    "min_available_weight_fraction": 0.5,
+    "require_vegetation_or_water": true
+  }
+}

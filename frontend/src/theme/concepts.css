@@ -1,0 +1,122 @@
+/* ================= MITTI ALMANAC ================= */
+[data-concept="mitti"][data-mode="light"]{
+  --fp-bg:#F7F0E3; --fp-bg-alt:#EFE4D0; --fp-surface:#FFFBF4; --fp-surface-2:#F3E9D8; --fp-border:#DCCBB0;
+  --fp-ink:#2A1C12; --fp-ink-muted:#6E5A47; --fp-primary:#B4532A; --fp-on-primary:#FFF7EE; --fp-accent:#6B7F2A; --fp-on-accent:#FFFFFF;
+  --fp-success:#4E7D2B; --fp-warning:#C98A12; --fp-danger:#A8321E; --fp-info:#5E7A6E;
+  --fp-risk-low:#5E8C31; --fp-risk-medium:#D9A21B; --fp-risk-high:#D26A1E; --fp-risk-critical:#A8261B;
+  --fp-ndvi-0:#8C5A2B; --fp-ndvi-1:#C9A04A; --fp-ndvi-2:#E5D36A; --fp-ndvi-3:#9CC25A; --fp-ndvi-4:#3F8A3A;
+  --fp-nav-bg:#2A1C12; --fp-nav-ink:#F3E7D6; --fp-nav-active:#B4532A;
+  --fp-furrow:rgba(180,83,42,.06); --fp-glow:rgba(201,138,18,.10);
+  --fp-shadow:3px 3px 0 rgba(42,28,18,.12); --fp-map-filter:sepia(.25) saturate(.9);
+}
+[data-concept="mitti"][data-mode="dark"]{
+  --fp-bg:#1B130D; --fp-bg-alt:#231910; --fp-surface:#2A1E15; --fp-surface-2:#35271C; --fp-border:#4A3727;
+  --fp-ink:#F3E7D6; --fp-ink-muted:#BCA88F; --fp-primary:#E07A4C; --fp-on-primary:#1B130D; --fp-accent:#A9BE5A; --fp-on-accent:#1B130D;
+  --fp-success:#8DBE5A; --fp-warning:#E9B84A; --fp-danger:#E5624A; --fp-info:#8FB3A3;
+  --fp-risk-low:#86B95B; --fp-risk-medium:#E8BC45; --fp-risk-high:#EE8A42; --fp-risk-critical:#EF5B4A;
+  --fp-ndvi-0:#A8703E; --fp-ndvi-1:#D8B25A; --fp-ndvi-2:#EEDD7A; --fp-ndvi-3:#A9CF66; --fp-ndvi-4:#5BAE4F;
+  --fp-nav-bg:#120C08; --fp-nav-ink:#F3E7D6; --fp-nav-active:#E07A4C;
+  --fp-furrow:rgba(224,122,76,.05); --fp-glow:rgba(233,184,74,.07);
+  --fp-shadow:3px 3px 0 rgba(0,0,0,.45); --fp-map-filter:sepia(.2) brightness(.95);
+}
+[data-concept="mitti"]{ --fp-font-display:'Fraunces',serif; --fp-font-body:'Work Sans','Inter',sans-serif; --fp-font-mono:'Work Sans','Inter',sans-serif; --fp-radius-card:6px; --fp-radius-ctl:4px; }
+
+/* ================= HARYALI CANOPY ================= */
+[data-concept="haryali"][data-mode="light"]{
+  --fp-bg:#EEF5EC; --fp-bg-alt:#E2EDDF; --fp-surface:#FFFFFF; --fp-surface-2:#F4F9F2; --fp-border:#CFE0CA;
+  --fp-ink:#10241A; --fp-ink-muted:#4D6656; --fp-primary:#1E6B3C; --fp-on-primary:#FFFFFF; --fp-accent:#7FB800; --fp-on-accent:#10241A;
+  --fp-success:#2E8B4E; --fp-warning:#D19A00; --fp-danger:#C2412D; --fp-info:#2C8C83;
+  --fp-risk-low:#3C9A55; --fp-risk-medium:#E0B000; --fp-risk-high:#E07B1F; --fp-risk-critical:#C9302C;
+  --fp-ndvi-0:#A0522D; --fp-ndvi-1:#D4A84B; --fp-ndvi-2:#EDE26A; --fp-ndvi-3:#8CCB4F; --fp-ndvi-4:#1F8A3E;
+  --fp-nav-bg:#FFFFFF; --fp-nav-ink:#10241A; --fp-nav-active:#1E6B3C;
+  --fp-contour:rgba(30,107,60,.10); --fp-glow:rgba(127,184,0,.14); --fp-glass:rgba(255,255,255,.82);
+  --fp-shadow:0 1px 2px rgba(16,36,26,.06),0 8px 24px rgba(16,36,26,.06); --fp-map-filter:none;
+}
+[data-concept="haryali"][data-mode="dark"]{
+  --fp-bg:#0B1510; --fp-bg-alt:#0F1C15; --fp-surface:#13241A; --fp-surface-2:#1A3023; --fp-border:#24402F;
+  --fp-ink:#E3F1E6; --fp-ink-muted:#93B09D; --fp-primary:#4CC97A; --fp-on-primary:#06110B; --fp-accent:#C8F135; --fp-on-accent:#0B1510;
+  --fp-success:#5DD68A; --fp-warning:#F2C230; --fp-danger:#FF6B57; --fp-info:#4FD1C1;
+  --fp-risk-low:#5DD68A; --fp-risk-medium:#F2C230; --fp-risk-high:#FF9A3D; --fp-risk-critical:#FF5A4E;
+  --fp-ndvi-0:#B8673A; --fp-ndvi-1:#E0B556; --fp-ndvi-2:#F0E67A; --fp-ndvi-3:#9BDA5E; --fp-ndvi-4:#3FC46A;
+  --fp-nav-bg:#0F1C15; --fp-nav-ink:#E3F1E6; --fp-nav-active:#4CC97A;
+  --fp-contour:rgba(76,201,122,.08); --fp-glow:rgba(200,241,53,.10); --fp-glass:rgba(19,36,26,.72);
+  --fp-shadow:0 0 0 1px rgba(76,201,122,.08),0 12px 32px rgba(0,0,0,.5); --fp-map-filter:none;
+}
+[data-concept="haryali"]{ --fp-font-display:'Space Grotesk',sans-serif; --fp-font-body:'IBM Plex Sans','Inter',sans-serif; --fp-font-mono:'Plus Jakarta Sans','Inter',sans-serif; --fp-radius-card:14px; --fp-radius-ctl:10px; }
+
+/* ================= SARSON SUNRISE ================= */
+[data-concept="sarson"][data-mode="light"]{
+  --fp-bg:#FFF7DB; --fp-bg-alt:#FDEFC0; --fp-surface:#FFFDF5; --fp-surface-2:#FFF3CC; --fp-border:#EED9A0;
+  --fp-ink:#2B1533; --fp-ink-muted:#6B5372; --fp-primary:#5B2A72; --fp-on-primary:#FFF7DB; --fp-accent:#F2A900; --fp-on-accent:#2B1533;
+  --fp-success:#3F8F3A; --fp-warning:#E07A00; --fp-danger:#C8323C; --fp-info:#2F8F7A;
+  --fp-risk-low:#4C9A3F; --fp-risk-medium:#F2B400; --fp-risk-high:#EB7A10; --fp-risk-critical:#CC2E3A;
+  --fp-ndvi-0:#9B5B2E; --fp-ndvi-1:#E2B04A; --fp-ndvi-2:#F4E27A; --fp-ndvi-3:#A6D25E; --fp-ndvi-4:#3E9B45;
+  --fp-nav-bg:#FFFDF5; --fp-nav-ink:#2B1533; --fp-nav-active:#F2A900;
+  --fp-hill-1:rgba(242,169,0,.35); --fp-hill-2:rgba(63,143,58,.25); --fp-hill-3:rgba(91,42,114,.14); --fp-sun:rgba(242,169,0,.35);
+  --fp-shadow:0 6px 0 rgba(91,42,114,.10),0 14px 30px rgba(91,42,114,.10); --fp-map-filter:saturate(1.1);
+}
+[data-concept="sarson"][data-mode="dark"]{
+  --fp-bg:#170E1C; --fp-bg-alt:#1E1325; --fp-surface:#251831; --fp-surface-2:#30203E; --fp-border:#45305A;
+  --fp-ink:#FBEFD6; --fp-ink-muted:#C3AFC9; --fp-primary:#C79BE0; --fp-on-primary:#170E1C; --fp-accent:#FFC53D; --fp-on-accent:#170E1C;
+  --fp-success:#7ACB6E; --fp-warning:#FFA040; --fp-danger:#FF6B78; --fp-info:#5FD0B5;
+  --fp-risk-low:#7ACB6E; --fp-risk-medium:#FFC53D; --fp-risk-high:#FF9840; --fp-risk-critical:#FF5D6C;
+  --fp-ndvi-0:#B06A3A; --fp-ndvi-1:#E8BA56; --fp-ndvi-2:#F6E58A; --fp-ndvi-3:#AEDB6A; --fp-ndvi-4:#55B65C;
+  --fp-nav-bg:#1E1325; --fp-nav-ink:#FBEFD6; --fp-nav-active:#FFC53D;
+  --fp-hill-1:rgba(255,197,61,.16); --fp-hill-2:rgba(122,203,110,.14); --fp-hill-3:rgba(199,155,224,.12); --fp-sun:rgba(251,239,214,.14);
+  --fp-shadow:0 6px 0 rgba(0,0,0,.35),0 14px 30px rgba(0,0,0,.45); --fp-map-filter:brightness(.9) saturate(.9);
+}
+[data-concept="sarson"]{ --fp-font-display:'Baloo 2',cursive; --fp-font-body:'Plus Jakarta Sans','Nunito',sans-serif; --fp-font-mono:'Plus Jakarta Sans','Inter',sans-serif; --fp-radius-card:22px; --fp-radius-ctl:12px; }
+[data-concept="sarson"] .fp-btn{ border-radius:999px; }
+/* ================= SHARED SKIN CLASSES ================= */
+html,body{ background:var(--fp-bg); color:var(--fp-ink); font-family:var(--fp-font-body); }
+.font-regional{ font-family:'Noto Sans Devanagari','Noto Sans Gurmukhi',var(--fp-font-body); }
+.leaflet-tile-pane{ filter:var(--fp-map-filter); }
+.fp-card{ background:var(--fp-surface); border:1px solid var(--fp-border); border-radius:var(--fp-radius-card); box-shadow:var(--fp-shadow); }
+.fp-btn{ border-radius:var(--fp-radius-ctl); font-weight:600; padding:.55rem 1rem; display:inline-flex; gap:.5rem; align-items:center; transition:transform .12s, background .12s; }
+.fp-btn:focus-visible,.fp-input:focus-visible{ outline:2px solid var(--fp-accent); outline-offset:2px; }
+.fp-btn:disabled{ opacity:.5; cursor:not-allowed; }
+.fp-btn-primary{ background:var(--fp-primary); color:var(--fp-on-primary); }
+.fp-btn-accent{ background:var(--fp-accent); color:var(--fp-on-accent); }
+.fp-btn-ghost{ background:transparent; color:var(--fp-ink); border:1px solid var(--fp-border); }
+.fp-btn-danger{ background:var(--fp-danger); color:#fff; }
+.fp-input{ background:var(--fp-surface-2); border:1px solid var(--fp-border); border-radius:var(--fp-radius-ctl); padding:.5rem .75rem; color:var(--fp-ink); }
+.fp-eyebrow{ font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--fp-ink-muted); font-weight:600; }
+.fp-num,.font-mono,code{ font-family:var(--fp-font-mono); font-variant-numeric:tabular-nums; }
+
+/* Mitti specifics: almanac rules, hard offset shadow, small caps */
+[data-concept="mitti"] .fp-eyebrow{ font-variant:small-caps; text-transform:none; letter-spacing:.08em; font-size:.85rem; border-bottom:1px solid var(--fp-border); padding-bottom:.25rem; }
+[data-concept="mitti"] .fp-kpi-value{ font-family:var(--fp-font-display); font-size:2.6rem; font-weight:700; line-height:1; }
+[data-concept="mitti"] .fp-btn-primary:hover{ transform:translate(-1px,-1px); box-shadow:2px 2px 0 var(--fp-ink); }
+[data-concept="mitti"] h1,[data-concept="mitti"] h2{ font-family:var(--fp-font-display); }
+
+/* Haryali specifics: glass panels, mono eyebrow, glow */
+[data-concept="haryali"] .fp-card{ background:var(--fp-glass); backdrop-filter:blur(10px); }
+[data-concept="haryali"] .fp-eyebrow{ font-family:var(--fp-font-mono); text-transform:none; letter-spacing:.02em; }
+[data-concept="haryali"] .fp-eyebrow::before{ content:"// "; color:var(--fp-accent); }
+[data-concept="haryali"] .fp-kpi-value{ font-family:var(--fp-font-mono); font-size:2.2rem; font-weight:600; }
+[data-concept="haryali"] .fp-btn-primary:hover{ box-shadow:0 0 0 4px color-mix(in srgb, var(--fp-primary) 25%, transparent); }
+[data-concept="haryali"] h1,[data-concept="haryali"] h2{ font-family:var(--fp-font-display); letter-spacing:-.02em; }
+.fp-live-dot{ width:8px; height:8px; border-radius:999px; background:var(--fp-success); animation:fp-pulse 1.6s infinite; }
+@keyframes fp-pulse{ 0%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--fp-success) 60%,transparent);} 100%{ box-shadow:0 0 0 10px transparent;} }
+
+/* Sarson specifics: chunky rounded, pill eyebrow, bouncy hover */
+[data-concept="sarson"] .fp-card{ border-width:2px; }
+[data-concept="sarson"] .fp-eyebrow{ display:inline-block; background:color-mix(in srgb,var(--fp-accent) 25%,transparent); color:var(--fp-ink); padding:.15rem .6rem; border-radius:999px; }
+[data-concept="sarson"] .fp-kpi-value{ font-family:var(--fp-font-display); font-size:2.5rem; font-weight:800; }
+[data-concept="sarson"] .fp-card:hover,[data-concept="sarson"] .fp-btn:hover{ transform:translateY(-2px); }
+[data-concept="sarson"] h1,[data-concept="sarson"] h2{ font-family:var(--fp-font-display); }
+
+/* Backdrop base */
+.fp-backdrop{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+[data-concept="mitti"] .fp-backdrop{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(115deg, transparent 0 22px, var(--fp-furrow) 22px 23px),
+    radial-gradient(1100px 600px at 100% 0%, var(--fp-glow), transparent 60%);
+}
+[data-concept="haryali"] .fp-backdrop{ background:radial-gradient(900px 520px at 92% -10%, var(--fp-glow), transparent 60%), radial-gradient(700px 400px at -10% 110%, var(--fp-glow), transparent 60%); }
+[data-concept="haryali"][data-mode="dark"] .fp-backdrop::after{ content:""; position:absolute; inset:0; background-image:radial-gradient(var(--fp-contour) 1px, transparent 1px); background-size:22px 22px; }
+[data-concept="sarson"] .fp-backdrop{ background:linear-gradient(180deg, var(--fp-bg) 0%, var(--fp-bg-alt) 100%); }
+[data-concept="sarson"][data-mode="dark"] .fp-backdrop{ background-image:radial-gradient(rgba(251,239,214,.35) 1px, transparent 1.5px), linear-gradient(180deg,var(--fp-bg),var(--fp-bg-alt)); background-size:90px 90px, auto; }
+@media (prefers-reduced-motion: reduce){ *{ animation:none!important; transition:none!important; } }
+@media print{ .fp-backdrop,nav,aside,.no-print{ display:none!important; } .fp-card{ box-shadow:none; } }

@@ -1,0 +1,437 @@
+{
+  "input_rows": 5280,
+  "label_mode": "anomaly_delta",
+  "missing_values": {
+    "baseline_ndvi": 1388,
+    "ndvi_anomaly_pct": 1388,
+    "ndmi_current": 5280,
+    "ndvi_delta_prev": 36,
+    "days_since_prev_obs": 36,
+    "ndvi_trend": 36,
+    "ndmi_trend": 5280,
+    "next_observation_date": 36,
+    "next_ndvi": 36,
+    "next_ndvi_anomaly_pct": 1388,
+    "next_gap_days": 36,
+    "label_delta": 1599,
+    "label": 1599
+  },
+  "dropped_low_quality": 0,
+  "label_definition": "next valid NDVI anomaly - current anomaly <= -10.0 percentage points (within 48 days) [EXPERIMENTAL THRESHOLD]",
+  "dropped_no_next_or_gap": 243,
+  "unlabelled_rows": 1599,
+  "output_rows": 5280,
+  "labelled_rows": 3681,
+  "positives": 464,
+  "locations": 36,
+  "period": {
+    "start": "2019-01-01",
+    "end": "2026-09-14"
+  },
+  "monitoring_cells_candidates": 36,
+  "monitoring_cells_used": 36,
+  "excluded_cells": {},
+  "composites_downloaded_for_used_cells": 6408,
+  "valid_satellite_observations": 5280,
+  "quality_filtering": "composite kept when cell NDVI exists (>=1 accepted pixel, reliability 0/1, not fill) and valid_pixel_pct >= 40.0",
+  "observations_with_baseline": 3892,
+  "label_prevalence": 0.1261,
+  "years_covered": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "sources": {
+    "satellite": "NASA LP DAAC MOD13Q1 C6.1 via ORNL DAAC TESViS web service (https://modis.ornl.gov/rst/api/v1/)",
+    "weather": "Open-Meteo historical weather API (ERA5-based reanalysis), https://archive-api.open-meteo.com/v1/archive",
+    "boundary": "geoBoundaries gbOpen IND ADM2"
+  },
+  "weather_retrieval": {
+    "YVT_CELL_001": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:24:56+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.56239,
+      "grid_longitude": 78.02419,
+      "elevation_m": 287.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_002": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:01+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.56239,
+      "grid_longitude": 78.20565,
+      "elevation_m": 259.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_003": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:06+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.351492,
+      "grid_longitude": 77.698494,
+      "elevation_m": 344.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_004": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:11+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.351492,
+      "grid_longitude": 77.879395,
+      "elevation_m": 352.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_005": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:15+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.351492,
+      "grid_longitude": 78.0603,
+      "elevation_m": 416.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_006": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:22+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.421791,
+      "grid_longitude": 78.22938,
+      "elevation_m": 401.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_007": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:28+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.421791,
+      "grid_longitude": 78.41047,
+      "elevation_m": 402.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_008": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:25:31+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.351492,
+      "grid_longitude": 78.512566,
+      "elevation_m": 243.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_009": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:33:27+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 77.72317,
+      "elevation_m": 381.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_010": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:33:29+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 77.90371,
+      "elevation_m": 319.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_011": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:33:31+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 78.08425,
+      "elevation_m": 325.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_012": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:33:32+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 78.17452,
+      "elevation_m": 326.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_013": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:33:34+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 78.355064,
+      "elevation_m": 356.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_014": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:33:36+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 78.53561,
+      "elevation_m": 321.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_015": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:34:42+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 78.71615,
+      "elevation_m": 253.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_016": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:34:44+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.210896,
+      "grid_longitude": 78.89669,
+      "elevation_m": 221.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_017": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:34:47+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 77.74775,
+      "elevation_m": 350.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_018": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:34:50+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 77.927925,
+      "elevation_m": 310.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_019": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:34:53+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 78.01801,
+      "elevation_m": 300.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_020": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:34:56+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 78.1982,
+      "elevation_m": 277.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_021": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:02+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 78.37838,
+      "elevation_m": 295.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_022": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:04+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 78.558556,
+      "elevation_m": 250.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_023": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:07+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 78.73874,
+      "elevation_m": 303.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_024": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:09+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 20.070297,
+      "grid_longitude": 78.82883,
+      "elevation_m": 229.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_025": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:12+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 77.41259,
+      "elevation_m": 552.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_026": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:17+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 77.59241,
+      "elevation_m": 329.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_027": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:36:19+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 77.772224,
+      "elevation_m": 299.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_028": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:26:03+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 78.58142,
+      "elevation_m": 229.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_029": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:26:07+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 78.671326,
+      "elevation_m": 338.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_030": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:26:16+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 78.85115,
+      "elevation_m": 227.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_031": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:26:19+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.9297,
+      "grid_longitude": 79.03097,
+      "elevation_m": 203.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_032": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:26:23+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.718803,
+      "grid_longitude": 77.53984,
+      "elevation_m": 469.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_033": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:26:26+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.718803,
+      "grid_longitude": 77.719124,
+      "elevation_m": 312.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_034": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:37:32+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.578207,
+      "grid_longitude": 77.74354,
+      "elevation_m": 415.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_035": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:37:36+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.578207,
+      "grid_longitude": 77.92246,
+      "elevation_m": 402.0,
+      "timezone": "Asia/Kolkata"
+    },
+    "YVT_CELL_036": {
+      "source": "open_meteo",
+      "retrieved_at": "2026-10-17T19:37:39+00:00",
+      "cache": "CACHED_FRESH",
+      "endpoint": "archive",
+      "grid_latitude": 19.578207,
+      "grid_longitude": 78.10139,
+      "elevation_m": 410.0,
+      "timezone": "Asia/Kolkata"
+    }
+  },
+  "synthetic_rows": 0,
+  "label_threshold_sensitivity_pre_test_only": {
+    "-5.0": {
+      "rows": 2925,
+      "prevalence": 0.2557
+    },
+    "-10.0": {
+      "rows": 2925,
+      "prevalence": 0.1207
+    },
+    "-15.0": {
+      "rows": 2925,
+      "prevalence": 0.0643
+    },
+    "-20.0": {
+      "rows": 2925,
+      "prevalence": 0.0373
+    }
+  },
+  "label_threshold_rule": "Primary threshold -10 percentage points is kept unless its train+validation prevalence is below 5%; then the strictest of -7.5 / -5 reaching 5% is used. The test period is never used to choose the threshold.",
+  "label_threshold_used": -10.0
+}

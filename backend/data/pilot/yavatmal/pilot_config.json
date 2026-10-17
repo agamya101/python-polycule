@@ -1,0 +1,58 @@
+{
+  "pilot_id": "yavatmal",
+  "region": "Yavatmal, Maharashtra",
+  "country": "India",
+  "primary_crop_context": "cotton",
+  "scope": "regional vegetation monitoring",
+  "positioning": "Yavatmal regional agricultural / vegetation monitoring pilot, designed around the cotton intervention use case. Monitoring cells are regional sampling locations, not farmer fields and not verified cotton fields.",
+  "boundary": {
+    "dataset": "geoBoundaries gbOpen IND ADM2",
+    "shape_name": "Yavatmal",
+    "api": "https://www.geoboundaries.org/api/current/gbOpen/IND/ADM2/",
+    "download_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson"
+  },
+  "cells": {
+    "target_candidates": 36,
+    "edge_buffer_km": 3.0,
+    "subset_km_above_below": 1,
+    "subset_km_left_right": 1,
+    "screening": {
+      "_note": "Cells whose long-term median NDVI is below min_median_ndvi (water bodies, built-up, bare land) or that have too few usable composites are excluded from monitoring. This is vegetation screening, not crop classification.",
+      "min_median_ndvi": 0.2,
+      "min_usable_fraction": 0.5
+    }
+  },
+  "satellite": {
+    "provider": "ornl_daac_tesvis",
+    "product": "MOD13Q1",
+    "collection": "6.1",
+    "resolution_m": 250,
+    "composite_interval_days": 16,
+    "start_date": "2019-01-01",
+    "accepted_pixel_reliability": [0, 1],
+    "min_valid_pixel_pct": 40.0
+  },
+  "weather": {
+    "provider": "open_meteo_archive",
+    "start_date": "2018-11-01"
+  },
+  "baseline": {
+    "_note": "Past-only seasonal baseline: for an observation at date t, use the same location's accepted observations at least min_days_before days earlier (previous seasons only) whose day-of-year is within window_days (circular). Requires at least min_prior_years distinct prior years and min_observations observations; otherwise the baseline is unavailable.",
+    "window_days": 16,
+    "min_days_before": 300,
+    "min_prior_years": 2,
+    "min_observations": 3
+  },
+  "label": {
+    "mode": "anomaly_delta",
+    "anomaly_drop_pct_points": -10.0,
+    "max_gap_days": 48,
+    "_note": "EXPERIMENTAL label: next valid anomaly minus current anomaly <= -10 percentage points, next observation within 48 days (three 16-day composites). Not confirmed crop stress."
+  },
+  "split": {
+    "spatial_holdout_cells": 6,
+    "val_frac": 0.6,
+    "test_frac": 0.8
+  },
+  "model_enabled_for_pilot": false
+}

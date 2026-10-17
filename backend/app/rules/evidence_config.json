@@ -1,0 +1,65 @@
+{
+  "_note": "Evidence quality describes how much and how good the available data is. It is NOT a model confidence and says nothing about whether the risk classification is correct.",
+  "weights": {
+    "satellite_coverage": 0.3,
+    "freshness": 0.25,
+    "observation_count": 0.2,
+    "baseline_reliability": 0.15,
+    "metadata_quality": 0.1
+  },
+  "satellite_coverage": {
+    "zero_score_valid_pct": 20.0,
+    "full_score_valid_pct": 90.0
+  },
+  "freshness": {
+    "full_score_max_age_days": 5,
+    "zero_score_age_days": 30,
+    "stale_after_days": 15
+  },
+  "observation_count": {
+    "window_days": 30,
+    "full_score_count": 3
+  },
+  "baseline_reliability": {
+    "full_score_observations": 6,
+    "full_score_years": 2
+  },
+  "min_usable_valid_pixel_pct": 40.0,
+  "bands": [
+    {
+      "level": "POOR",
+      "min": 0,
+      "max": 40
+    },
+    {
+      "level": "LIMITED",
+      "min": 40,
+      "max": 60
+    },
+    {
+      "level": "MODERATE",
+      "min": 60,
+      "max": 80
+    },
+    {
+      "level": "GOOD",
+      "min": 80,
+      "max": 101
+    }
+  ],
+  "product_profiles": {
+    "_note": "Freshness and observation-count expectations depend on the satellite product. MOD13Q1 is a 16-day composite published with a production delay of roughly 1-3 weeks after the composite period ends, so a composite start date ~32 days old is the newest data normally obtainable. The default profile reflects ~5-day Sentinel-2 revisits.",
+    "modis_mod13q1": {
+      "freshness": {
+        "full_score_max_age_days": 34,
+        "zero_score_age_days": 70,
+        "stale_after_days": 48
+      },
+      "observation_count": {
+        "window_days": 64,
+        "full_score_count": 3
+      },
+      "trend_window_days": 64
+    }
+  }
+}
