@@ -612,7 +612,7 @@ def build_live_district_report(id: str, refresh: bool = False) -> dict[str, Any]
         # Heat stress: 31.8°C (0.15)
         # Composite score = round(0.40 * 75 + 0.35 * 20 + 0.25 * 15) = 41 (or 48 with dry-spell watch)
         risk_score = 48
-        risk_level = "MODERATE"
+        risk_level = "MEDIUM"
         priority = "P2"
         escalate = True if consecutive_dry_days >= 21 else False
         escalation_reason = (
@@ -1011,7 +1011,7 @@ def compute_live_field_assessment(farmer: dict[str, Any]) -> tuple[dict[str, Any
             freshness_days = veg.observation_age_days
             obs_count = veg.usable_observations_total
 
-            reliability = "HIGH" if veg.latest_valid_pixel_pct >= 80 else "MODERATE"
+            reliability = "HIGH" if veg.latest_valid_pixel_pct >= 80 else "MEDIUM"
             reliability_reasons = [
                 f"{veg.latest_valid_pixel_pct:.0f}% cloud-free Sentinel-2 pixels on {veg.latest_usable_date}",
                 f"Evaluated against {ndvi_baseline} baseline ({veg.ndvi_baseline.n_observations if veg.ndvi_baseline else 0} seasonal passes)",
@@ -1020,9 +1020,9 @@ def compute_live_field_assessment(farmer: dict[str, Any]) -> tuple[dict[str, Any
         if risk and risk.level:
             lvl = risk.level.value
             if lvl == "INSUFFICIENT_EVIDENCE":
-                stress_level = "MODERATE" if (weather and weather.dry_spell_length_days and weather.dry_spell_length_days > 14) else "LOW"
+                stress_level = "MEDIUM" if (weather and weather.dry_spell_length_days and weather.dry_spell_length_days > 14) else "LOW"
             else:
-                stress_level = lvl
+                stress_level = "MEDIUM" if lvl == "MODERATE" else lvl
 
         if weather and weather.water_balance_14d_mm is not None and weather.water_balance_14d_mm < -30:
             stress_type = "WATER"
@@ -1224,7 +1224,7 @@ def analyze_farmer(id: str, x_actor: Optional[str] = Header(None), x_role: Optio
 
     # Open case if not exists and stress warrants review
     case = next((c for c in store.cases if c.get("farmerId") == id and c.get("status") != "CLOSED"), None)
-    if not case and stress.get("stressLevel") in ("MODERATE", "HIGH", "CRITICAL"):
+    if not case and stress.get("stressLevel") in ("MEDIUM", "MODERATE", "HIGH", "CRITICAL"):
         case_id = f"CASE-{len(store.cases) + 1:04d}"
         case = {
             "id": case_id,

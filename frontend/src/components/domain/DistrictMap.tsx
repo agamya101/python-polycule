@@ -132,7 +132,8 @@ export const DistrictMap = forwardRef<DistrictMapHandle, DistrictMapProps>(
     };
 
     const getRiskColor = (level: DistrictSummary['riskLevel']): string => {
-      return colors.risk[level];
+      const norm = (String(level ?? 'LOW').toUpperCase() === 'MODERATE' ? 'MEDIUM' : String(level ?? 'LOW').toUpperCase()) as keyof typeof colors.risk;
+      return colors.risk[norm] ?? colors.risk.LOW;
     };
 
     return (

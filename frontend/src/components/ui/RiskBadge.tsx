@@ -8,6 +8,10 @@ export interface RiskBadgeProps {
 }
 
 export function RiskBadge({ level, score, className }: RiskBadgeProps) {
+  const normalizedLevel = (
+    String(level ?? 'LOW').toUpperCase() === 'MODERATE' ? 'MEDIUM' : String(level ?? 'LOW').toUpperCase()
+  ) as RiskLevel;
+
   const styles: Record<RiskLevel, { badge: string; dot: string }> = {
     LOW: {
       badge: 'bg-risk-low/15 text-risk-low border-risk-low/30',
@@ -27,7 +31,7 @@ export function RiskBadge({ level, score, className }: RiskBadgeProps) {
     },
   };
 
-  const s = styles[level];
+  const s = styles[normalizedLevel] ?? styles.LOW;
 
   return (
     <span
@@ -38,7 +42,7 @@ export function RiskBadge({ level, score, className }: RiskBadgeProps) {
       )}
     >
       <span className={cn('w-2 h-2 rounded-full shrink-0', s.dot)} />
-      <span>{level}</span>
+      <span>{normalizedLevel}</span>
       {score !== undefined && <span className="opacity-80">({score})</span>}
     </span>
   );
