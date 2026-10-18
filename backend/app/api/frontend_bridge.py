@@ -1049,9 +1049,14 @@ def verify_boundary(id: str, body: BoundaryVerifyBody, x_actor: Optional[str] = 
 # =============================================================================
 @router.get("/soil-cards")
 def get_soil_cards(farmerId: Optional[str] = None) -> list[dict[str, Any]]:
-    if farmerId:
-        return [s for s in store.soil_cards if s.get("farmerId") == farmerId]
-    return store.soil_cards
+    cards = [s for s in store.soil_cards if s.get("farmerId") == farmerId] if farmerId else store.soil_cards
+    for c in cards:
+        farmer = next((f for f in store.farmers if f["id"] == c.get("farmerId")), None)
+        area = farmer.get("field", {}).get("areaHa", 1.2) if farmer else 1.2
+        c["recommendations"] = [
+            norm for r in c.get("recommendations", []) if (norm := normalize_fertilizer_rec(r, area)) is not None
+        ]
+    return cards
 
 
 PARAM_METAS = {
@@ -1093,27 +1098,86 @@ def normalize_soil_param(p: Any) -> dict[str, Any]:
     }
 
 
-def normalize_fertilizer_rec(r: Any, farm_area: float = 1.2) -> dict[str, Any]:
+def resolve_backend_bag_size(product: str, label: str = "") -> Optional[float]:
+    combined = f"{product} {label}".lower()
+    if "urea" in combined:
+        return 45.0
+    if "dap" in combined:
+        return 50.0
+    if "mop" in combined:
+        return 50.0
+    if "ssp" in combined:
+        return 50.0
+    if "npk" in combined:
+        return 50.0
+    return None
+
+
+def normalize_fertilizer_rec(r: Any, farm_area: float = 1.2) -> Optional[dict[str, Any]]:
     if hasattr(r, "dict"):
         r = r.dict()
     elif not isinstance(r, dict):
         r = dict(r)
-    dose = float(r.get("cardDose", 100.0) or 100.0)
-    unit = str(r.get("cardDoseUnit", "kg/ha") or "kg/ha")
-    kg_per_ha = round(dose, 1) if unit == "kg/ha" else round(dose * 2.4711, 1)
-    kg_per_acre = round(dose, 1) if unit == "kg/acre" else round(kg_per_ha / 2.4711, 1)
-    bag_sizes = {"Urea": 45.0, "DAP": 50.0, "MOP": 50.0, "SSP": 50.0, "NPK_10_26_26": 50.0, "Zinc Sulphate": None}
-    prod = str(r.get("product", "Urea"))
-    bag_size = r.get("bagSizeKg") or bag_sizes.get(prod)
-    bags_per_acre = round((kg_per_acre / bag_size) * 2) / 2 if bag_size else None
-    farm_acres = farm_area * 2.4711
+
+    raw_dose = r.get("cardDose")
+    if raw_dose is None:
+        return None
+    try:
+        if isinstance(raw_dose, str):
+            clean_num = re.search(r"[-+]?\d*\.?\d+", raw_dose)
+            dose = float(clean_num.group(0)) if clean_num else 0.0
+        else:
+            dose = float(raw_dose)
+    except (ValueError, TypeError):
+        return None
+
+    if dose <= 0:
+        return None
+
+    unit = str(r.get("cardDoseUnit", "kg/ha") or "kg/ha").lower().strip()
+    if unit == "kg/ha":
+        kg_per_ha = round(dose, 1)
+        kg_per_acre = round(kg_per_ha / 2.4711, 1)
+    elif unit == "kg/acre":
+        kg_per_acre = round(dose, 1)
+        kg_per_ha = round(kg_per_acre * 2.4711, 1)
+    elif "bigha" in unit:
+        kg_per_acre = round(dose * 3.025, 1)
+        kg_per_ha = round(dose * 7.475, 1)
+    else:
+        kg_per_ha = round(dose, 1)
+        kg_per_acre = round(kg_per_ha / 2.4711, 1)
+
+    prod = str(r.get("product") or "Urea")
+    label = str(r.get("productLabel") or prod)
+
+    bag_size = None
+    if r.get("bagSizeKg"):
+        try:
+            bag_size = float(r.get("bagSizeKg"))
+        except (ValueError, TypeError):
+            bag_size = None
+    if not bag_size:
+        bag_size = resolve_backend_bag_size(prod, label)
+
+    # If row does not have standard bag data or dose conversions, it has blank values -> remove it
+    if not bag_size or bag_size <= 0:
+        return None
+
+    bags_per_acre = round((kg_per_acre / bag_size) * 2) / 2
+    farm_acres = (farm_area or 1.0) * 2.4711
     kg_for_farm = round(kg_per_acre * farm_acres)
-    bags_for_farm = round((kg_for_farm / bag_size) * 2) / 2 if bag_size else None
+    bags_for_farm = round((kg_for_farm / bag_size) * 2) / 2
+
+    # Verify no blank values remain
+    if bags_per_acre <= 0 or bags_for_farm <= 0 or kg_per_ha <= 0 or kg_per_acre <= 0:
+        return None
+
     return {
         "product": prod,
-        "productLabel": str(r.get("productLabel") or prod),
+        "productLabel": label,
         "cardDose": dose,
-        "cardDoseUnit": unit,
+        "cardDoseUnit": r.get("cardDoseUnit", unit),
         "kgPerHa": kg_per_ha,
         "kgPerAcre": kg_per_acre,
         "bagSizeKg": bag_size,
@@ -1121,7 +1185,7 @@ def normalize_fertilizer_rec(r: Any, farm_area: float = 1.2) -> dict[str, Any]:
         "bagsForFarm": bags_for_farm,
         "kgForFarm": kg_for_farm,
         "timing": r.get("timing", "Split application"),
-        "sourceText": r.get("sourceText", f"{prod} @ {dose} {unit}"),
+        "sourceText": r.get("sourceText", f"{label} @ {dose} {unit}"),
     }
 
 
@@ -1196,7 +1260,9 @@ async def create_soil_card_ocr(
         "imageUrl": None,
         "status": "CONFIRMED",
         "params": [normalize_soil_param(p) for p in params],
-        "recommendations": [normalize_fertilizer_rec(r, farmer.get("field", {}).get("areaHa", 1.2)) for r in recs],
+        "recommendations": [
+            norm for r in recs if (norm := normalize_fertilizer_rec(r, farmer.get("field", {}).get("areaHa", 1.2))) is not None
+        ],
         "cardAgeYears": 0.1,
         "ageFlag": False,
         "extractionMethod": extraction_method,
@@ -1239,7 +1305,9 @@ def create_soil_card_manual(body: SoilCardManualCreate, x_actor: Optional[str] =
         "imageUrl": None,
         "status": "CONFIRMED",
         "params": [normalize_soil_param(p) for p in (body.params or [])],
-        "recommendations": [normalize_fertilizer_rec(r, farmer.get("field", {}).get("areaHa", 1.2)) for r in (body.recommendations or [])],
+        "recommendations": [
+            norm for r in (body.recommendations or []) if (norm := normalize_fertilizer_rec(r, farmer.get("field", {}).get("areaHa", 1.2))) is not None
+        ],
         "cardAgeYears": 0.1,
         "ageFlag": False,
         "extractionMethod": "MANUAL",
@@ -1270,6 +1338,11 @@ def get_soil_card(id: str) -> dict[str, Any]:
     card = next((s for s in store.soil_cards if s["id"] == id), None)
     if not card:
         raise_error("NOT_FOUND", f"Soil card {id} not found", 404)
+    farmer = next((f for f in store.farmers if f["id"] == card.get("farmerId")), None)
+    area = farmer.get("field", {}).get("areaHa", 1.2) if farmer else 1.2
+    card["recommendations"] = [
+        norm for r in card.get("recommendations", []) if (norm := normalize_fertilizer_rec(r, area)) is not None
+    ]
     return card
 
 
@@ -1283,7 +1356,11 @@ def patch_soil_card(id: str, body: SoilCardPatch, x_actor: Optional[str] = Heade
     if body.params is not None:
         card["params"] = body.params
     if body.recommendations is not None:
-        card["recommendations"] = body.recommendations
+        farmer = next((f for f in store.farmers if f["id"] == card.get("farmerId")), None)
+        area = farmer.get("field", {}).get("areaHa", 1.2) if farmer else 1.2
+        card["recommendations"] = [
+            norm for r in body.recommendations if (norm := normalize_fertilizer_rec(r, area)) is not None
+        ]
     if body.status is not None:
         card["status"] = body.status
     if body.cardNumber is not None:

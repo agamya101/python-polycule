@@ -4,7 +4,7 @@ import type {
   FertilizerRecommendation,
   RecommendationInput,
 } from '@/api/contract';
-import { formatBagsDisplay } from '@/lib/soil';
+import { formatBagsDisplay, isCompleteFertilizerRec } from '@/lib/soil';
 
 const PRODUCTS: { value: FertilizerProduct; label: string }[] = [
   { value: 'Urea', label: 'Urea' },
@@ -27,8 +27,11 @@ export function FertilizerTable({
   editable = false,
   onChangeRecommendations,
 }: FertilizerTableProps) {
+  // Automatically remove/filter out any rows with blank, null, or unconvertible values
+  const validRecommendations = recommendations.filter(isCompleteFertilizerRec);
+
   const toInputs = (): RecommendationInput[] =>
-    recommendations.map((r) => ({
+    validRecommendations.map((r) => ({
       product: r.product,
       productLabel: r.productLabel,
       cardDose: r.cardDose,
@@ -61,6 +64,14 @@ export function FertilizerTable({
     onChangeRecommendations?.(next);
   };
 
+  if (validRecommendations.length === 0 && !editable) {
+    return (
+      <div className="p-6 text-center rounded-card border border-line bg-surface-2/40 text-ink-muted text-xs font-mono">
+        No converted fertilizer recommendations available for this card.
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-2.5">
       <div className="overflow-x-auto rounded-card border border-line bg-surface">
@@ -79,7 +90,7 @@ export function FertilizerTable({
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
-            {recommendations.map((rec, idx) => (
+            {validRecommendations.map((rec, idx) => (
               <tr key={idx} className="hover:bg-surface-2/60">
                 <td className="py-2.5 px-3 font-semibold text-ink">
                   {editable ? (

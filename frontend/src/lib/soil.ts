@@ -211,47 +211,89 @@ export const BAG_SIZES_KG: Record<FertilizerProduct, number | null> = {
   Other: null,
 };
 
+export function resolveBagSize(product?: string, label?: string): number | null {
+  const combined = `${product ?? ''} ${label ?? ''}`.toLowerCase();
+  if (combined.includes('urea')) return 45;
+  if (combined.includes('dap')) return 50;
+  if (combined.includes('mop')) return 50;
+  if (combined.includes('ssp')) return 50;
+  if (combined.includes('npk')) return 50;
+  if (product && product in BAG_SIZES_KG) {
+    return BAG_SIZES_KG[product as FertilizerProduct];
+  }
+  return null;
+}
+
+export function isCompleteFertilizerRec(r: FertilizerRecommendation | null | undefined): boolean {
+  if (!r) return false;
+  const hasDose = r.cardDose !== null && r.cardDose !== undefined && Number(r.cardDose) > 0;
+  const hasKgHa = r.kgPerHa !== null && r.kgPerHa !== undefined && Number(r.kgPerHa) > 0;
+  const hasKgAcre = r.kgPerAcre !== null && r.kgPerAcre !== undefined && Number(r.kgPerAcre) > 0;
+  const hasBagSize = r.bagSizeKg !== null && r.bagSizeKg !== undefined && Number(r.bagSizeKg) > 0;
+  const hasBagsAcre = r.bagsPerAcre !== null && r.bagsPerAcre !== undefined && Number(r.bagsPerAcre) > 0;
+  const hasBagsFarm = r.bagsForFarm !== null && r.bagsForFarm !== undefined && Number(r.bagsForFarm) > 0;
+  const hasProduct = Boolean((r.productLabel && r.productLabel.trim()) || (r.product && r.product.trim()));
+  return hasDose && hasKgHa && hasKgAcre && hasBagSize && hasBagsAcre && hasBagsFarm && hasProduct;
+}
+
 export function computeFertilizerRec(
   input: RecommendationInput,
   farmAreaHa: number,
 ): FertilizerRecommendation {
-  const kgPerHa =
-    input.cardDoseUnit === 'kg/ha'
-      ? Math.round(input.cardDose * 10) / 10
-      : Math.round(input.cardDose * 2.4711 * 10) / 10;
+  const rawDose = Number(input.cardDose);
+  const unit = (input.cardDoseUnit || 'kg/ha').toLowerCase().trim();
 
-  const kgPerAcre =
-    input.cardDoseUnit === 'kg/acre'
-      ? Math.round(input.cardDose * 10) / 10
-      : Math.round((kgPerHa / 2.4711) * 10) / 10;
+  let kgPerHa: number | null = null;
+  let kgPerAcre: number | null = null;
 
-  const bagSizeKg = BAG_SIZES_KG[input.product] ?? null;
+  if (!Number.isNaN(rawDose) && rawDose > 0) {
+    if (unit === 'kg/ha') {
+      kgPerHa = Math.round(rawDose * 10) / 10;
+      kgPerAcre = Math.round((kgPerHa / 2.4711) * 10) / 10;
+    } else if (unit === 'kg/acre') {
+      kgPerAcre = Math.round(rawDose * 10) / 10;
+      kgPerHa = Math.round(kgPerAcre * 2.4711 * 10) / 10;
+    } else if (unit.includes('bigha')) {
+      // Standard regional conversion (1 ha ≈ 7.475 bigha, 1 acre ≈ 3.025 bigha)
+      kgPerAcre = Math.round(rawDose * 3.025 * 10) / 10;
+      kgPerHa = Math.round(rawDose * 7.475 * 10) / 10;
+    } else {
+      kgPerHa = Math.round(rawDose * 10) / 10;
+      kgPerAcre = Math.round((kgPerHa / 2.4711) * 10) / 10;
+    }
+  }
+
+  const bagSizeKg = resolveBagSize(input.product, input.productLabel);
   const bagsPerAcre =
-    bagSizeKg !== null ? Math.round((kgPerAcre / bagSizeKg) * 2) / 2 : null;
+    bagSizeKg !== null && kgPerAcre !== null && kgPerAcre > 0
+      ? Math.round((kgPerAcre / bagSizeKg) * 2) / 2
+      : null;
 
-  const farmAcres = farmAreaHa * 2.4711;
-  const kgForFarm = Math.round(kgPerAcre * farmAcres);
+  const farmAcres = (farmAreaHa || 1.0) * 2.4711;
+  const kgForFarm = kgPerAcre !== null ? Math.round(kgPerAcre * farmAcres) : null;
   const bagsForFarm =
-    bagSizeKg !== null ? Math.round((kgForFarm / bagSizeKg) * 2) / 2 : null;
+    bagSizeKg !== null && kgForFarm !== null && kgForFarm > 0
+      ? Math.round((kgForFarm / bagSizeKg) * 2) / 2
+      : null;
 
   return {
     product: input.product,
     productLabel: input.productLabel,
     cardDose: input.cardDose,
     cardDoseUnit: input.cardDoseUnit,
-    kgPerHa,
-    kgPerAcre,
+    kgPerHa: kgPerHa as any,
+    kgPerAcre: kgPerAcre as any,
     bagSizeKg,
     bagsPerAcre,
     bagsForFarm,
-    kgForFarm,
+    kgForFarm: kgForFarm as any,
     timing: input.timing,
     sourceText: input.sourceText,
   };
 }
 
 export function formatBagsDisplay(bags: number | null, kg: number): string {
-  if (bags === null) return `${kg} kg (no standard bag)`;
+  if (bags === null || bags === undefined) return '—';
   if (bags === 0 && kg > 0) return `less than ½ bag (${kg} kg)`;
   return `${bags} ${bags === 1 ? 'bag' : 'bags'}`;
 }
@@ -324,9 +366,10 @@ export function buildSoilCardSmsEnglish(
           .join(', ')
       : 'All parameters within normal range';
 
+  const completeRecs = recs.filter(isCompleteFertilizerRec);
   const recList =
-    recs.length > 0
-      ? recs
+    completeRecs.length > 0
+      ? completeRecs
           .map((r) => {
             if (r.bagSizeKg !== null && r.bagsPerAcre !== null) {
               if (r.bagsPerAcre === 0 && r.kgPerAcre > 0) {

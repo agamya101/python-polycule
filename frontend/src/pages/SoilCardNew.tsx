@@ -45,6 +45,7 @@ import {
   computeFertilizerRec,
   evaluateSoilParam,
   getParamSpec,
+  isCompleteFertilizerRec,
   SOIL_PARAM_SPECS,
 } from '@/lib/soil';
 
@@ -116,19 +117,21 @@ export default function SoilCardNew() {
           p.confirmed ?? false,
         ),
       );
-      const normalizedRecs = (created.recommendations ?? []).map((r) =>
-        computeFertilizerRec(
-          {
-            product: r.product as any,
-            productLabel: r.productLabel || r.product,
-            cardDose: r.cardDose,
-            cardDoseUnit: r.cardDoseUnit,
-            timing: r.timing,
-            sourceText: r.sourceText,
-          },
-          farmArea,
-        ),
-      );
+      const normalizedRecs = (created.recommendations ?? [])
+        .map((r) =>
+          computeFertilizerRec(
+            {
+              product: r.product as any,
+              productLabel: r.productLabel || r.product,
+              cardDose: r.cardDose,
+              cardDoseUnit: r.cardDoseUnit,
+              timing: r.timing,
+              sourceText: r.sourceText,
+            },
+            farmArea,
+          ),
+        )
+        .filter(isCompleteFertilizerRec);
       setCard({ ...created, params: normalizedParams, recommendations: normalizedRecs });
       setSmsLanguage(selectedFarmer.language);
       toast.success('OCR extracted 12 parameters — review safeguard flags before confirming');
@@ -174,19 +177,21 @@ export default function SoilCardNew() {
           p.confirmed ?? false,
         ),
       );
-      const normalizedRecs = (created.recommendations ?? []).map((r) =>
-        computeFertilizerRec(
-          {
-            product: r.product as any,
-            productLabel: r.productLabel || r.product,
-            cardDose: r.cardDose,
-            cardDoseUnit: r.cardDoseUnit,
-            timing: r.timing,
-            sourceText: r.sourceText,
-          },
-          farmArea,
-        ),
-      );
+      const normalizedRecs = (created.recommendations ?? [])
+        .map((r) =>
+          computeFertilizerRec(
+            {
+              product: r.product as any,
+              productLabel: r.productLabel || r.product,
+              cardDose: r.cardDose,
+              cardDoseUnit: r.cardDoseUnit,
+              timing: r.timing,
+              sourceText: r.sourceText,
+            },
+            farmArea,
+          ),
+        )
+        .filter(isCompleteFertilizerRec);
       setCard({ ...created, params: normalizedParams, recommendations: normalizedRecs });
       setSmsLanguage(selectedFarmer.language);
       setStep(3);
@@ -213,7 +218,9 @@ export default function SoilCardNew() {
   const handleRecommendationsChange = (inputs: RecommendationInput[]) => {
     if (!card) return;
     const area = selectedFarmer?.field.areaHa ?? 1.0;
-    const recs = inputs.map((r) => computeFertilizerRec(r, area));
+    const recs = inputs
+      .map((r) => computeFertilizerRec(r, area))
+      .filter(isCompleteFertilizerRec);
     setCard({ ...card, recommendations: recs });
   };
 

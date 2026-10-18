@@ -41,7 +41,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { RoleGate } from '@/components/ui/RoleGate';
 import { Select } from '@/components/ui/Select';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { computeFertilizerRec, evaluateSoilParam } from '@/lib/soil';
+import { computeFertilizerRec, evaluateSoilParam, isCompleteFertilizerRec } from '@/lib/soil';
 
 export default function SoilCardDetail() {
   const { cardId = 'SHC-0001' } = useParams<{ cardId: string }>();
@@ -79,19 +79,21 @@ export default function SoilCardDetail() {
       setFarmer(fDetail);
       setSmsLang(fDetail.language);
       const farmArea = fDetail?.field?.areaHa ?? 1.2;
-      const normalizedRecs = (sc.recommendations ?? []).map((r) =>
-        computeFertilizerRec(
-          {
-            product: r.product as any,
-            productLabel: r.productLabel || r.product,
-            cardDose: r.cardDose,
-            cardDoseUnit: r.cardDoseUnit,
-            timing: r.timing,
-            sourceText: r.sourceText,
-          },
-          farmArea,
-        ),
-      );
+      const normalizedRecs = (sc.recommendations ?? [])
+        .map((r) =>
+          computeFertilizerRec(
+            {
+              product: r.product as any,
+              productLabel: r.productLabel || r.product,
+              cardDose: r.cardDose,
+              cardDoseUnit: r.cardDoseUnit,
+              timing: r.timing,
+              sourceText: r.sourceText,
+            },
+            farmArea,
+          ),
+        )
+        .filter(isCompleteFertilizerRec);
       setCard({ ...sc, params: normalizedParams, recommendations: normalizedRecs });
       const foundMsg =
         msgs.find((m) => m.id === sc.messageId || m.soilCardId === sc.id) ?? null;
@@ -147,7 +149,9 @@ export default function SoilCardDetail() {
     const area = farmer?.field.areaHa ?? 1.2;
     setCard({
       ...card,
-      recommendations: inputs.map((r) => computeFertilizerRec(r, area)),
+      recommendations: inputs
+        .map((r) => computeFertilizerRec(r, area))
+        .filter(isCompleteFertilizerRec),
     });
   };
 
@@ -170,7 +174,23 @@ export default function SoilCardDetail() {
           sourceText: r.sourceText,
         })),
       });
-      setCard(updated);
+      const area = farmer?.field.areaHa ?? 1.2;
+      const normalizedRecs = (updated.recommendations ?? [])
+        .map((r: any) =>
+          computeFertilizerRec(
+            {
+              product: r.product as any,
+              productLabel: r.productLabel || r.product,
+              cardDose: r.cardDose,
+              cardDoseUnit: r.cardDoseUnit,
+              timing: r.timing,
+              sourceText: r.sourceText,
+            },
+            area,
+          ),
+        )
+        .filter(isCompleteFertilizerRec);
+      setCard({ ...updated, recommendations: normalizedRecs });
       toast.success('Soil card changes saved');
     } finally {
       setBusy(false);
