@@ -140,4 +140,4 @@ python-polycule/
 ---
 
 ## 👥 Team
-Built with ❤️ for **HackShift** by the KrishiMitra team.
+Hardik Khurana, Aryan Kumar, Arihant Kapkoti, Divisha Agarwal, Agamya Jain
