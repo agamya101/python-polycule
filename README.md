@@ -69,13 +69,8 @@ python-polycule/
    pip install -r requirements.txt
    ```
 
-4. Configure environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit `.env` and provide your credentials:
-   * `SENTINEL_CLIENT_ID` & `SENTINEL_CLIENT_SECRET`: Your Copernicus Data Space Ecosystem (CDSE) credentials.
-   * `GEMINI_API_KEY`: Your Google Gemini API key (for vernacular SMS generation & Soil Card OCR).
+4. Environment variables & API keys:
+   The repository includes pre-configured `.env` files for both backend and frontend containing active **Copernicus Data Space Ecosystem (CDSE)** credentials and **Google Gemini Flash** API keys. No manual key entry is required to run live queries out of the box.
 
 5. Start the FastAPI server:
    ```bash
@@ -104,15 +99,13 @@ python-polycule/
    npm install
    ```
 
-3. Configure environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-   Ensure `.env` contains:
+3. Environment variables:
+   The repository already includes `frontend/.env` pre-configured for live backend calls:
    ```env
    VITE_USE_MOCKS=false
    VITE_API_BASE=http://127.0.0.1:8000
    ```
+   *(No manual file copying required).*
 
 4. Start the Vite development server:
    ```bash

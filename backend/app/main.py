@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
 from app.api import demo, followups, frontend_bridge, health, inspections, interventions, model, pilot, registry, risk, satellite, soil, weather
-from app.config import get_settings
+from app.config import BACKEND_DIR, get_settings
 from app.database import init_db
 from app.errors import install_error_handlers
 
@@ -33,6 +33,27 @@ Satellite vegetation anomalies are never presented as pest or disease diagnoses.
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     init_db()
+    # Auto-generate local .env if missing for seamless team onboarding
+    env_file = BACKEND_DIR / ".env"
+    if not env_file.exists():
+        s = get_settings()
+        env_content = (
+            f"APP_ENV=development\n"
+            f"DATABASE_URL=sqlite:///./krishimitra.db\n"
+            f"CORS_ORIGINS=http://localhost:3000,http://localhost:5173,http://127.0.0.1:5173\n\n"
+            f"# Copernicus Data Space Ecosystem (CDSE) credentials\n"
+            f"SENTINEL_CLIENT_ID={s.sentinel_client_id}\n"
+            f"SENTINEL_CLIENT_SECRET={s.sentinel_client_secret}\n"
+            f"SENTINEL_TOKEN_URL={s.sentinel_token_url}\n"
+            f"SENTINEL_STATS_URL={s.sentinel_stats_url}\n\n"
+            f"# Google Gemini API key\n"
+            f"GEMINI_API_KEY={s.gemini_api_key}\n\n"
+            f"CACHE_TTL_SECONDS=3600\n"
+        )
+        try:
+            env_file.write_text(env_content, encoding="utf-8")
+        except Exception:
+            pass
     yield
 
 
