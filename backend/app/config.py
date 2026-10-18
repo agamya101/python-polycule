@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -69,6 +70,15 @@ class Settings(BaseSettings):
 
     gemini_api_key: str | None = Field(default_factory=_default_gemini_key)
 
+    # TextBee Android SMS gateway (https://textbee.dev). Approved advisories are
+    # dispatched through it; without an API key sending stays disabled.
+    textbee_api_key: str | None = None
+    textbee_device_id: str | None = None
+    textbee_base_url: str = "https://api.textbee.dev/api/v1"
+    # Comma-separated E.164 numbers. Seeded/new farmers are assigned these in
+    # rotation, and SMS is never sent to any number outside this list.
+    sms_allowed_numbers: str = ""
+
     model_enabled: bool = False
     use_demo_data: bool = False
     cache_ttl_seconds: int = 3600
@@ -109,6 +119,14 @@ class Settings(BaseSettings):
     @property
     def gemini_configured(self) -> bool:
         return bool(self.gemini_api_key)
+
+    @property
+    def textbee_configured(self) -> bool:
+        return bool(self.textbee_api_key)
+
+    @property
+    def sms_allowed_number_list(self) -> list[str]:
+        return [re.sub(r"[^\d+]", "", n) for n in self.sms_allowed_numbers.split(",") if n.strip()]
 
     @property
     def cache_dir(self) -> Path:

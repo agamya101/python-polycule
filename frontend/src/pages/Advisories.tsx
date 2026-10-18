@@ -374,7 +374,8 @@ export const Advisories: React.FC = () => {
     try {
       const updated = await approveMessage(drawerMsg.id, 'Verified numbers and KVK contact');
       await syncAfterDrawerAction(updated);
-      toast.success('Message approved');
+      if (updated.status === 'FAILED') toast.error(`Approved, but SMS failed: ${updated.statusHistory.at(-1)?.note ?? ''}`);
+      else toast.success(updated.status === 'SENT' ? 'Message approved and SMS sent' : 'Message approved');
     } finally {
       setActionBusy(false);
     }
@@ -511,7 +512,7 @@ export const Advisories: React.FC = () => {
     return (
       <div className="space-y-6">
         <PageHeader
-          eyebrow="Layer 5 · Multilingual Outreach"
+          eyebrow="Layer 4 · Multilingual Outreach"
           title="Advisories & Outbound SMS"
           description="Compose, verify numeric fidelity, submit for department approval, and track delivery through farmer acknowledgement."
         />
@@ -532,7 +533,7 @@ export const Advisories: React.FC = () => {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Layer 5 · Multilingual Outreach"
+        eyebrow="Layer 4 · Multilingual Outreach"
         title="Advisories & Outbound SMS"
         description="Draft localized farmer advisories with strict numeric preservation. Nothing is dispatched without Agriculture Department approval."
         actions={

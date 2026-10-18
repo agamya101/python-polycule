@@ -95,7 +95,8 @@ export const Approvals: React.FC = () => {
       const updated = await approveMessage(msg.id, note);
       setRecentlyApproved((prev) => ({ ...prev, [msg.id]: updated }));
       setQueue((prev) => prev.filter((item) => item.id !== msg.id));
-      toast.success(`Message ${msg.id} approved`);
+      if (updated.status === 'FAILED') toast.error(`Message ${msg.id} approved, but SMS failed: ${updated.statusHistory.at(-1)?.note ?? ''}`);
+      else toast.success(updated.status === 'SENT' ? `Message ${msg.id} approved and SMS sent` : `Message ${msg.id} approved`);
     } finally {
       setBusyId(null);
     }
@@ -130,7 +131,7 @@ export const Approvals: React.FC = () => {
     return (
       <div className="space-y-6">
         <PageHeader
-          eyebrow="Layer 4 · Institutional Approval Gate"
+          eyebrow="Layer 5 · Institutional Approval Gate"
           title="Department Approval Queue"
           description="Nothing reaches a farmer without department approval."
         />
@@ -148,7 +149,7 @@ export const Approvals: React.FC = () => {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Layer 4 · Institutional Approval Gate"
+        eyebrow="Layer 5 · Institutional Approval Gate"
         title="Department Approval Queue"
         description="Nothing reaches a farmer without department approval. Separation of duties is strictly enforced: the person who generated a message cannot approve their own draft."
         actions={

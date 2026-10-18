@@ -47,8 +47,8 @@ export function SarsonLayout({ counts, children }: SarsonLayoutProps) {
     { label: 'Early Warning', route: '/early-warning', icon: Satellite, badgeKey: 'activeAlerts' as const },
     { label: 'Farmers', route: '/farmers', icon: Users },
     { label: 'Soil Cards', route: '/soil-cards', icon: FlaskConical },
-    { label: 'Approvals', route: '/approvals', icon: ShieldCheck, badgeKey: 'pendingApprovals' as const },
     { label: 'Advisories', route: '/advisories', icon: MessageSquareText },
+    { label: 'Approvals', route: '/approvals', icon: ShieldCheck, badgeKey: 'pendingApprovals' as const },
   ];
 
   const layer6Items = [

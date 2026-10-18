@@ -24,6 +24,7 @@ from pydantic import BaseModel
 from app.config import BACKEND_DIR, get_settings
 from app.services import followup_engine, soil_engine
 from app.services.gemini_service import GeminiService
+from app.services.textbee_service import TextBeeError, TextBeeService, mask_number, normalize_number
 
 router = APIRouter(prefix="/api", tags=["frontend_bridge"])
 
@@ -116,6 +117,12 @@ class Store:
             self.audit_events = data.get("auditEvents", [])
             self.data_sources = data.get("dataSources", [])
 
+        # Seed farmers carry only masked placeholder numbers; give each a real
+        # test number from SMS_ALLOWED_NUMBERS (in rotation) so dispatch works.
+        for farmer in self.farmers:
+            if not farmer.get("phone"):
+                self.assign_test_phone(farmer)
+
         # Live Yavatmal MODIS pilot check
         if PILOT_FILE.exists():
             for ds in self.data_sources:
@@ -139,6 +146,14 @@ class Store:
                 ds["mode"] = "LIVE"
                 ds["name"] = "Google Gemini Flash (Live Vision & Translation)"
                 ds["lastSuccessAt"] = now_iso
+
+    def assign_test_phone(self, farmer: dict[str, Any]) -> None:
+        numbers = get_settings().sms_allowed_number_list
+        if not numbers:
+            return
+        idx = self.farmers.index(farmer) if farmer in self.farmers else len(self.farmers)
+        farmer["phone"] = numbers[idx % len(numbers)]
+        farmer["phoneMasked"] = mask_number(farmer["phone"])
 
     def append_audit_event(
         self,
@@ -1099,7 +1114,7 @@ def create_farmer(body: dict[str, Any], x_actor: Optional[str] = Header(None), x
     farmer = {
         "id": next_id,
         "name": body["name"],
-        "phone": body.get("phone", "+91 90000 00000"),
+        "phone": normalize_number(body.get("phone") or ""),
         "village": body["village"],
         "districtId": body["districtId"],
         "language": body.get("language", "Marathi"),
@@ -1128,6 +1143,10 @@ def create_farmer(body: dict[str, Any], x_actor: Optional[str] = Header(None), x
     # Live assessment calculation for newly registered field
     stress, live_obs = compute_live_field_assessment(farmer)
     farmer["latestStress"] = stress
+    if farmer["phone"]:
+        farmer["phoneMasked"] = mask_number(farmer["phone"])
+    else:
+        store.assign_test_phone(farmer)
     store.farmers.append(farmer)
     store.observations_by_farmer[next_id] = live_obs
 
@@ -1926,6 +1945,8 @@ def approve_message(id: str, body: MessageApproveBody, x_actor: Optional[str] = 
         district_id=msg.get("districtId"),
         summary=f"Approved message {id} after verifying separation of duties (drafted by {msg.get('generatedBy')})",
     )
+    if get_settings().textbee_configured:
+        return _dispatch_message(msg, actor, role)
     return msg
 
 
@@ -1959,30 +1980,18 @@ def reject_message(id: str, body: MessageRejectBody, x_actor: Optional[str] = He
     return msg
 
 
-@router.post("/messages/{id}/send")
-def send_message(id: str, x_actor: Optional[str] = Header(None), x_role: Optional[str] = Header(None)) -> dict[str, Any]:
-    actor, role = get_actor_info(x_actor, x_role)
-    msg = next((m for m in store.messages if m["id"] == id), None)
-    if not msg:
-        raise_error("NOT_FOUND", f"Message {id} not found", 404)
-
-    if msg.get("status") != "APPROVED":
-        raise_error("INVALID_STATE", f"Message must be in APPROVED status to dispatch (currently {msg.get('status')}).", 400)
-
-    # Check consent if individual farmer message
+def _message_recipients(msg: dict[str, Any]) -> list[str]:
     if msg.get("farmerId"):
         farmer = next((f for f in store.farmers if f["id"] == msg["farmerId"]), None)
-        if farmer and not farmer.get("consentSms"):
-            raise_error("CONSENT_MISSING", f"Farmer {farmer['name']} has not granted SMS consent.", 400)
+        return [farmer["phone"]] if farmer and farmer.get("phone") else []
+    return [
+        f["phone"]
+        for f in store.farmers
+        if f.get("districtId") == msg.get("districtId") and f.get("consentSms") and f.get("phone")
+    ]
 
-    now_iso = datetime.now(timezone.utc).isoformat()
-    msg["status"] = "DELIVERED"
-    msg["providerMessageId"] = f"live-tw-{id.lower()}"
-    msg["deliveryStats"] = {"sent": msg.get("recipientCount", 1), "delivered": msg.get("recipientCount", 1), "failed": 0, "acknowledged": 0}
-    msg["statusHistory"].append({"status": "SENT", "at": now_iso, "actor": actor, "role": role, "note": "Dispatched via gateway"})
-    msg["statusHistory"].append({"status": "DELIVERED", "at": now_iso, "actor": "SYSTEM", "role": "SYSTEM", "note": "Delivered to handset"})
 
-    # Start follow-up on linked case if exists
+def _start_followup_watch(msg: dict[str, Any], id: str, now_iso: str) -> None:
     if msg.get("caseId"):
         case = next((c for c in store.cases if c["id"] == msg["caseId"]), None)
         if case:
@@ -2012,18 +2021,92 @@ def send_message(id: str, x_actor: Optional[str] = Header(None), x_role: Optiona
                     "nextCheckAt": now_iso,
                 })
 
+
+
+def _dispatch_message(msg: dict[str, Any], actor: str, role: str) -> dict[str, Any]:
+    """Send an approved message through TextBee (or the mock gateway when no key is set)."""
+    id = msg["id"]
+
+    # Check consent if individual farmer message
+    if msg.get("farmerId"):
+        farmer = next((f for f in store.farmers if f["id"] == msg["farmerId"]), None)
+        if farmer and not farmer.get("consentSms"):
+            raise_error("CONSENT_MISSING", f"Farmer {farmer['name']} has not granted SMS consent.", 400)
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    gateway = TextBeeService()
+
+    if not gateway.configured:
+        msg["status"] = "DELIVERED"
+        msg["providerMessageId"] = f"mock-{id.lower()}"
+        msg["deliveryStats"] = {"sent": msg.get("recipientCount", 1), "delivered": msg.get("recipientCount", 1), "failed": 0, "acknowledged": 0}
+        msg["statusHistory"].append({"status": "SENT", "at": now_iso, "actor": actor, "role": role, "note": "Dispatched via mock gateway (TextBee not configured)"})
+        msg["statusHistory"].append({"status": "DELIVERED", "at": now_iso, "actor": "SYSTEM", "role": "SYSTEM", "note": "Simulated delivery"})
+        _start_followup_watch(msg, id, now_iso)
+        store.append_audit_event(
+            layer="OUTREACH", action="MESSAGE_DELIVERED", actor=actor, role=role,
+            entity_type="OutboundMessage", entity_id=id,
+            farmer_id=msg.get("farmerId"), district_id=msg.get("districtId"),
+            summary=f"Dispatched message {id} via mock gateway; started follow-up watch",
+            is_simulated=True,
+        )
+        return msg
+
+    allowed, blocked = gateway.filter_allowed(_message_recipients(msg))
+    text = msg.get("textLocal") or msg.get("textEnglish") or ""
+    error: Optional[str] = None
+    batch_id: Optional[str] = None
+    if not allowed:
+        error = "No recipient numbers on the SMS allow-list."
+    else:
+        try:
+            batch_id = gateway.send_sms(allowed, text)["batchId"]
+        except TextBeeError as exc:
+            error = str(exc)
+
+    msg["provider"] = "TEXTBEE"
+    blocked_note = f"; skipped {len(blocked)} number(s) not on allow-list" if blocked else ""
+    if error:
+        msg["status"] = "FAILED"
+        msg["deliveryStats"] = {"sent": 0, "delivered": 0, "failed": len(allowed) or 1, "acknowledged": 0}
+        msg["statusHistory"].append({"status": "FAILED", "at": now_iso, "actor": "SYSTEM", "role": "SYSTEM", "note": f"TextBee: {error}{blocked_note}"})
+        store.append_audit_event(
+            layer="OUTREACH", action="MESSAGE_FAILED", actor=actor, role=role,
+            entity_type="OutboundMessage", entity_id=id,
+            farmer_id=msg.get("farmerId"), district_id=msg.get("districtId"),
+            summary=f"TextBee dispatch of message {id} failed: {error}",
+        )
+        return msg
+
+    msg["status"] = "SENT"
+    msg["providerMessageId"] = batch_id
+    msg["recipientCount"] = len(allowed)
+    msg["deliveryStats"] = {"sent": len(allowed), "delivered": 0, "failed": 0, "acknowledged": 0}
+    masked = ", ".join(mask_number(n) for n in allowed)
+    msg["statusHistory"].append({"status": "SENT", "at": now_iso, "actor": actor, "role": role, "note": f"Sent via TextBee to {masked}{blocked_note}"})
+    _start_followup_watch(msg, id, now_iso)
+
     store.append_audit_event(
-        layer="OUTREACH",
-        action="MESSAGE_DELIVERED",
-        actor=actor,
-        role=role,
-        entity_type="OutboundMessage",
-        entity_id=id,
-        farmer_id=msg.get("farmerId"),
-        district_id=msg.get("districtId"),
-        summary=f"Dispatched message {id} to {msg.get('recipientCount', 1)} recipient(s); started follow-up watch",
+        layer="OUTREACH", action="MESSAGE_SENT", actor=actor, role=role,
+        entity_type="OutboundMessage", entity_id=id,
+        farmer_id=msg.get("farmerId"), district_id=msg.get("districtId"),
+        summary=f"Sent message {id} via TextBee to {len(allowed)} recipient(s) (batch {batch_id}); started follow-up watch",
     )
     return msg
+
+
+@router.post("/messages/{id}/send")
+def send_message(id: str, x_actor: Optional[str] = Header(None), x_role: Optional[str] = Header(None)) -> dict[str, Any]:
+    actor, role = get_actor_info(x_actor, x_role)
+    msg = next((m for m in store.messages if m["id"] == id), None)
+    if not msg:
+        raise_error("NOT_FOUND", f"Message {id} not found", 404)
+
+    # FAILED is allowed so an officer can retry after fixing the gateway/phone.
+    if msg.get("status") not in ("APPROVED", "FAILED") or not msg.get("approvedBy"):
+        raise_error("INVALID_STATE", f"Message must be in APPROVED status to dispatch (currently {msg.get('status')}).", 400)
+
+    return _dispatch_message(msg, actor, role)
 
 
 @router.post("/messages/{id}/refresh-status")
@@ -2031,6 +2114,27 @@ def refresh_message_status(id: str, x_actor: Optional[str] = Header(None), x_rol
     msg = next((m for m in store.messages if m["id"] == id), None)
     if not msg:
         raise_error("NOT_FOUND", f"Message {id} not found", 404)
+
+    if msg.get("provider") == "TEXTBEE" and msg.get("providerMessageId") and msg.get("status") == "SENT":
+        try:
+            counts = TextBeeService().batch_status(msg["providerMessageId"])
+        except TextBeeError as exc:
+            raise_error("GATEWAY_ERROR", str(exc), 502)
+        stats = msg.get("deliveryStats") or {"acknowledged": 0}
+        stats.update({"delivered": counts["delivered"], "failed": counts["failed"]})
+        msg["deliveryStats"] = stats
+        total = counts["total"]
+        new_status = None
+        if total and counts["delivered"] == total:
+            new_status = "DELIVERED"
+        elif total and counts["failed"] == total:
+            new_status = "FAILED"
+        if new_status:
+            msg["status"] = new_status
+            msg["statusHistory"].append({
+                "status": new_status, "at": datetime.now(timezone.utc).isoformat(), "actor": "SYSTEM", "role": "SYSTEM",
+                "note": f"TextBee: {counts['delivered']} delivered, {counts['failed']} failed of {total}",
+            })
     return msg
 
 

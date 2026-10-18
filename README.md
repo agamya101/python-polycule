@@ -171,6 +171,10 @@ To maintain institutional trust and prevent ungrounded AI dissemination:
 3. **SMS Encoding & Segment Calculation**:
    - Automatically detects GSM-7 vs. UCS-2 character sets.
    - Displays character counts and multi-part SMS concatenation costs (160/153 characters for GSM-7; 70/67 characters for regional unicode UCS-2).
+4. **Automatic SMS Dispatch (TextBee)**:
+   - As soon as a second officer approves an advisory, it is sent in the farmer's language through the [TextBee](https://textbee.dev) Android SMS gateway: to the farmer for individual advisories, or to every consenting farmer in the district for district advisories.
+   - Status moves to `SENT` (or `FAILED` with the gateway's reason, retryable via Send); **Refresh status** pulls per-recipient delivery results from TextBee.
+   - Configured entirely through `backend/.env` (see Quickstart); without a key the mock gateway is used.
 
 ---
 
@@ -372,10 +376,20 @@ python-polycule/
    ```
 
 4. Environment Configuration:
-   The repository includes pre-configured environment credentials in `backend/.env` with active Copernicus Data Space Ecosystem (CDSE) client credentials and Google Gemini API keys. To configure custom credentials, copy the template:
+   Copy the template to create your local `backend/.env` (it is git-ignored, so keys you put there are never pushed):
    ```bash
-   cp .env.example .env
+   cp .env.example .env        # Windows PowerShell: Copy-Item .env.example .env
    ```
+   Copernicus (CDSE) and Gemini work out of the box. To turn on **real SMS via TextBee**, fill these three lines in `backend/.env`:
+   ```env
+   TEXTBEE_API_KEY=txb_your_key_here            # textbee.dev dashboard -> API keys
+   TEXTBEE_DEVICE_ID=your_device_id             # optional; blank = your default TextBee device
+   SMS_ALLOWED_NUMBERS=+919XXXXXXXXX,+919YYYYYYYYY
+   ```
+   - `SMS_ALLOWED_NUMBERS` is a safety allow-list: demo farmers are given these numbers in rotation, and SMS is **never** sent to any number outside it.
+   - On the phone running the TextBee app, make sure **SMS permission is enabled** for the app.
+   - Leave `TEXTBEE_API_KEY` blank to use the built-in mock gateway (no real SMS).
+   - Restart the backend after editing `.env`.
 
 5. Start the FastAPI application server:
    ```bash
