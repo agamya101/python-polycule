@@ -1,6 +1,6 @@
 # KrishiMitra — Backend PRD, Frontend Feature Map & API Integration Guide (`apps/api`)
 
-> **Purpose of this document:** Hand this file directly to the backend developer (and their Claude coding assistant). The React + TypeScript frontend (`farmpulse360/apps/web`) is already 100% built. This document tells you **(1) every screen and feature that exists in the frontend**, **(2) how to adapt/bridge your already-built backend without rewriting your existing code**, and **(3) the exact API schemas, routes, and domain formulas**.
+> **Purpose of this document:** Hand this file directly to the backend developer (and their AI coding assistant). The React + TypeScript frontend (`farmpulse360/apps/web`) is already 100% built. This document tells you **(1) every screen and feature that exists in the frontend**, **(2) how to adapt/bridge your already-built backend without rewriting your existing code**, and **(3) the exact API schemas, routes, and domain formulas**.
 
 ---
 
@@ -14,8 +14,8 @@ If you have already written your FastAPI backend (Copernicus Sentinel-2 fetching
    - When `VITE_USE_MOCKS=false` is set, the frontend calls your FastAPI server at `http://127.0.0.1:8000`.
    - For every endpoint you **have** implemented, the frontend uses your **live backend response**.
    - For any endpoint your backend hasn't implemented yet (returns FastAPI's default `404 Not Found` or `501 Not Implemented`), the frontend **automatically falls back to its built-in stateful store** for that specific call so **zero screens crash during your demo**!
-2. **Tell Claude to Build an `adapter_router.py` Wrapper:**
-   - Give this file to Claude along with your existing backend files and use this prompt:
+2. **Ask Your AI Coding Assistant to Build an `adapter_router.py` Wrapper:**
+   - Give this file to your AI coding assistant along with your existing backend files and use this prompt:
      > *"Read `docs/BACKEND_INSTRUCTIONS.md`. Inspect my existing backend services (Sentinel-2, Gemini, weather, database). Do NOT delete my working logic — instead, create a FastAPI router (`adapter_router.py`) that exposes the `/api/...` routes from Section 3 and transforms my existing function outputs into the exact `camelCase` Pydantic schemas in Section 2. Prioritize Tier 1 endpoints (Section 9) first."*
 3. **See Section 8 for What Exists in the Frontend:**
    - Jump to **[Section 8: Complete Frontend Feature & Screen-by-Screen Map](#8-complete-frontend-feature--screen-by-screen-integration-map)** to see all 18 screens in the UI, every button/chart/map widget on each screen, and which API calls they trigger.
@@ -938,7 +938,7 @@ bikaner,Bikaner,Rajasthan,28.0229,73.3119,Wheat,1.9,0151-2250017,Hindi,0.57,0.65
 
 ## 8. Complete Frontend Feature & Screen-by-Screen Integration Map
 
-Because the frontend and backend were built in parallel, this section documents **every feature, screen, widget, persona, and button** that exists in `farmpulse360/apps/web` so you (and Claude) know exactly how the UI behaves and what data each screen expects.
+Because the frontend and backend were built in parallel, this section documents **every feature, screen, widget, persona, and button** that exists in `farmpulse360/apps/web` so you (and your AI coding assistant) know exactly how the UI behaves and what data each screen expects.
 
 ### 8.1 Global Shell, Personas & Headers
 - **Topbar Persona Switcher (`src/auth/personas.ts`):**
