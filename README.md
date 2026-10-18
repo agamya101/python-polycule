@@ -438,8 +438,8 @@ npm run build
 
 ## Team & Authors
 
-- **Hardik Khurana**
-- **Aryan Kumar**
-- **Arihant Kapkoti**
-- **Divisha Agarwal**
-- **Agamya Jain**
+- Hardik Khurana
+- Aryan Kumar
+- Arihant Kapkoti
+- Divisha Agarwal
+- Agamya Jain
