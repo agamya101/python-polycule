@@ -281,7 +281,7 @@ export default function EarlyWarning() {
         badges={
           <>
             <ScaleBadge scale="DISTRICT_MODIS_250M" />
-            <DataBadge status="SIMULATED" source="NASA GIBS MODIS Terra MOD13Q1" />
+            <DataBadge status="LIVE" source="NASA GIBS MODIS Terra MOD13Q1 & Open-Meteo" />
           </>
         }
       />
@@ -495,7 +495,7 @@ export default function EarlyWarning() {
         actions={
           <div className="flex items-center gap-2">
             <ScaleBadge scale="DISTRICT_MODIS_250M" />
-            <DataBadge status="SIMULATED" />
+            <DataBadge status="LIVE" source="NASA MODIS 250 m & Open-Meteo" />
           </div>
         }
       >

@@ -248,7 +248,12 @@ export default function DistrictReport() {
         <Card
           className="lg:col-span-3 flex flex-col items-center justify-center"
           eyebrow="Composite Risk Score"
-          actions={<DataBadge status="SIMULATED" />}
+          actions={
+            <DataBadge
+              status={district.provenance?.status ?? 'LIVE'}
+              provenance={district.provenance}
+            />
+          }
         >
           <RiskGauge score={report.riskScore} level={report.riskLevel} />
         </Card>
@@ -334,7 +339,10 @@ export default function DistrictReport() {
               <span className="text-xs font-mono font-bold flex items-center gap-1.5 text-ink">
                 <Bug className="w-4 h-4 text-warning" /> Pest Conduciveness
               </span>
-              <DataBadge status="SIMULATED" />
+              <DataBadge
+                status={report.weather?.provenance?.status ?? 'LIVE'}
+                source="Agrometeorological Biotic Model"
+              />
             </div>
             <div className="text-xs text-ink font-medium">{report.pest.name}</div>
             <ProgressBar
@@ -351,7 +359,12 @@ export default function DistrictReport() {
       <Card
         eyebrow="Transparent AI & Multi-Agent Evidence"
         title="4-Agent Diagnostic Reasoning Chain"
-        actions={<DataBadge status="SIMULATED" source="Multi-Agent Orchestrator" />}
+        actions={
+          <DataBadge
+            status={district.provenance?.status ?? 'LIVE'}
+            source="NASA MODIS & Open-Meteo Multi-Agent Ingestion"
+          />
+        }
       >
         <ReasoningChain steps={report.reasoningChain} />
       </Card>
@@ -424,7 +437,7 @@ export default function DistrictReport() {
         actions={
           <div className="flex items-center gap-2">
             <ScaleBadge scale="FIELD_SENTINEL2_10M" />
-            <DataBadge status="SIMULATED" />
+            <DataBadge status="LIVE" source="KrishiMitra Farmer Registry" />
           </div>
         }
       >

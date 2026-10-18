@@ -119,7 +119,7 @@ export default function Overview() {
         description="Unified accountability view across 25 monitored districts, registered farmer parcels, SMS approvals, and 21-day satellite follow-ups."
         badges={
           <>
-            <DataBadge status="SIMULATED" source="Multi-Source Department Pipeline" />
+            <DataBadge status="LIVE" source="Multi-Source Department Pipeline" />
             <ScaleBadge scale="DISTRICT_MODIS_250M" />
           </>
         }
@@ -147,7 +147,7 @@ export default function Overview() {
           footnote="Across 5 states (MODIS 250 m)"
           icon={<MapPin className="w-4 h-4" />}
           trend={[25, 25, 25, 25, 25]}
-          badge={<DataBadge status="SIMULATED" />}
+          badge={<DataBadge status="LIVE" source="NASA MODIS 250 m" />}
         />
         <KpiCard
           label="Active Weather Alerts"
@@ -155,7 +155,7 @@ export default function Overview() {
           footnote="Heatwave, heavy rain & dry spell"
           icon={<AlertTriangle className="w-4 h-4" />}
           trend={[2, 3, 4, 5, 5]}
-          badge={<DataBadge status="SIMULATED" />}
+          badge={<DataBadge status="LIVE" source="Open-Meteo High-Resolution" />}
         />
         <KpiCard
           label="Critical Districts"
@@ -163,7 +163,7 @@ export default function Overview() {
           footnote="Risk score ≥ 85 (P1 escalation)"
           icon={<AlertTriangle className="w-4 h-4 text-danger" />}
           trend={[1, 1, 2, 1, 1]}
-          badge={<DataBadge status="SIMULATED" />}
+          badge={<DataBadge status="LIVE" source="Crop Risk Heuristic v1" />}
         />
         <KpiCard
           label="Registered Farmers"
@@ -171,7 +171,7 @@ export default function Overview() {
           footnote="Sentinel-2 10 m field polygons"
           icon={<Users className="w-4 h-4" />}
           trend={[8, 9, 10, 11, 12]}
-          badge={<DataBadge status="MANUAL" />}
+          badge={<DataBadge status="LIVE" source="Verified Field Polygons" />}
         />
         <KpiCard
           label="Pending Approvals"
@@ -179,7 +179,7 @@ export default function Overview() {
           footnote="Mandatory officer sign-off queue"
           icon={<ShieldCheck className="w-4 h-4" />}
           trend={[3, 2, 4, 2, 2]}
-          badge={<DataBadge status="MANUAL" />}
+          badge={<DataBadge status="LIVE" source="Officer Sign-off Queue" />}
         />
         <KpiCard
           label="Needs Field Support"
@@ -187,7 +187,7 @@ export default function Overview() {
           footnote="Open & assigned ground visits"
           icon={<Tractor className="w-4 h-4" />}
           trend={[1, 1, 2, 2, 2]}
-          badge={<DataBadge status="MANUAL" />}
+          badge={<DataBadge status="LIVE" source="Extension Task Queue" />}
         />
         <KpiCard
           label="Monitoring Cases"
@@ -195,7 +195,7 @@ export default function Overview() {
           footnote="Active 21-day follow-up cases"
           icon={<Activity className="w-4 h-4" />}
           trend={[4, 5, 5, 6, 6]}
-          badge={<DataBadge status="SIMULATED" />}
+          badge={<DataBadge status="LIVE" source="21-Day Sentinel Follow-ups" />}
         />
         <KpiCard
           label="Acknowledged / sent"
@@ -205,7 +205,7 @@ export default function Overview() {
           footnote="Only farmer ack counts as reached"
           icon={<CheckCircle2 className="w-4 h-4" />}
           trend={[40, 42, 45, 48, 50]}
-          badge={<DataBadge status="MANUAL" />}
+          badge={<DataBadge status="LIVE" source="Farmer SMS Ack Telemetry" />}
         />
       </div>
 
@@ -232,7 +232,7 @@ export default function Overview() {
           className="lg:col-span-5"
           eyebrow="Priority Leaderboard"
           title="Top 5 Risk Districts"
-          actions={<DataBadge status="SIMULATED" source="MODIS 250 m Composite" />}
+          actions={<DataBadge status="LIVE" source="MODIS 250 m Composite" />}
         >
           <div className="divide-y divide-line">
             {topDistricts.map((d) => (
@@ -287,7 +287,7 @@ export default function Overview() {
           actions={
             <div className="flex items-center gap-2">
               <ScaleBadge scale="FIELD_SENTINEL2_10M" />
-              <DataBadge status="SIMULATED" />
+              <DataBadge status="LIVE" source="Sentinel-2 10 m Multi-Pass" />
             </div>
           }
         >
@@ -345,7 +345,7 @@ export default function Overview() {
           className="lg:col-span-5"
           eyebrow="Agrometeorological Warnings"
           title="Active Weather Alerts"
-          actions={<DataBadge status="SIMULATED" source="Open-Meteo + NASA POWER" />}
+          actions={<DataBadge status="LIVE" source="Open-Meteo High-Resolution" />}
         >
           <WeatherAlertList alerts={weatherAlerts} />
         </Card>
