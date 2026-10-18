@@ -35,7 +35,8 @@ export function SoilParamTable({
         <tbody className="divide-y divide-line">
           {params.map((row) => {
             const spec = getParamSpec(row.param);
-            const hasBlocking = row.flags.some((f) => f.blocking);
+            const flags = row.flags ?? [];
+            const hasBlocking = flags.some((f) => f.blocking);
             const isMissing = row.value === null;
             const confPct =
               row.ocrConfidence !== null ? Math.round(row.ocrConfidence * 100) : null;
@@ -152,13 +153,13 @@ export function SoilParamTable({
                   )}
                 </td>
                 <td className="py-2.5 px-3">
-                  {row.flags.length === 0 ? (
+                  {(row.flags ?? []).length === 0 ? (
                     <span className="text-success font-mono inline-flex items-center gap-1">
                       <Check className="w-3.5 h-3.5" /> Clean
                     </span>
                   ) : (
                     <div className="space-y-1.5">
-                      {row.flags.map((f, idx) => (
+                      {(row.flags ?? []).map((f, idx) => (
                         <div key={idx} className="flex flex-wrap items-center gap-1.5">
                           <span
                             className={cn(

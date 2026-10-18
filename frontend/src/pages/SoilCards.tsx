@@ -138,11 +138,11 @@ export default function SoilCards() {
     {
       key: 'flags',
       header: 'Flags Count',
-      sortValue: (c) => c.params.reduce((acc, p) => acc + p.flags.length, 0),
+      sortValue: (c) => (c.params ?? []).reduce((acc, p) => acc + (p.flags ?? []).length, 0),
       render: (c) => {
-        const totalFlags = c.params.reduce((acc, p) => acc + p.flags.length, 0);
-        const blockingCount = c.params.reduce(
-          (acc, p) => acc + p.flags.filter((f) => f.blocking).length,
+        const totalFlags = (c.params ?? []).reduce((acc, p) => acc + (p.flags ?? []).length, 0);
+        const blockingCount = (c.params ?? []).reduce(
+          (acc, p) => acc + (p.flags ? p.flags.filter((f) => f.blocking).length : 0),
           0,
         );
         if (totalFlags === 0) {

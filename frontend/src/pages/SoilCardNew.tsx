@@ -105,7 +105,17 @@ export default function SoilCardNew() {
       const dummyFile =
         selectedFile ?? new File(['mock-shc'], 'soil-health-card.jpg', { type: 'image/jpeg' });
       const created = await createSoilCardOcr(selectedFarmer.id, dummyFile);
-      setCard(created);
+      const normalizedParams = (created.params ?? []).map((p) =>
+        evaluateSoilParam(
+          p.param,
+          p.value,
+          p.unit,
+          p.ocrRaw ?? (p.value !== null ? String(p.value) : null),
+          p.ocrConfidence ?? 0.95,
+          p.confirmed ?? false,
+        ),
+      );
+      setCard({ ...created, params: normalizedParams });
       setSmsLanguage(selectedFarmer.language);
       toast.success('OCR extracted 12 parameters — review safeguard flags before confirming');
       setStep(3);
@@ -139,7 +149,17 @@ export default function SoilCardNew() {
           },
         ],
       });
-      setCard(created);
+      const normalizedParams = (created.params ?? []).map((p) =>
+        evaluateSoilParam(
+          p.param,
+          p.value,
+          p.unit,
+          p.ocrRaw ?? (p.value !== null ? String(p.value) : null),
+          p.ocrConfidence ?? 0.95,
+          p.confirmed ?? false,
+        ),
+      );
+      setCard({ ...created, params: normalizedParams });
       setSmsLanguage(selectedFarmer.language);
       setStep(3);
     } finally {
@@ -241,9 +261,12 @@ export default function SoilCardNew() {
   };
 
   const blockingCount = card
-    ? card.params.reduce((acc, p) => acc + p.flags.filter((f) => f.blocking).length, 0)
+    ? (card.params ?? []).reduce(
+        (acc, p) => acc + (p.flags ? p.flags.filter((f) => f.blocking).length : 0),
+        0,
+      )
     : 0;
-  const unconfirmedCount = card ? card.params.filter((p) => !p.confirmed).length : 0;
+  const unconfirmedCount = card ? (card.params ?? []).filter((p) => !p.confirmed).length : 0;
   const canConfirm = card !== null && blockingCount === 0 && unconfirmedCount === 0;
 
   const filteredFarmers = farmers.filter((f) => {

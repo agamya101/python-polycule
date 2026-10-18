@@ -61,7 +61,17 @@ export default function SoilCardDetail() {
     setError(null);
     try {
       const sc = await getSoilCard(cardId);
-      setCard(sc);
+      const normalizedParams = (sc.params ?? []).map((p) =>
+        evaluateSoilParam(
+          p.param,
+          p.value,
+          p.unit,
+          p.ocrRaw ?? (p.value !== null ? String(p.value) : null),
+          p.ocrConfidence ?? 0.95,
+          p.confirmed ?? false,
+        ),
+      );
+      setCard({ ...sc, params: normalizedParams });
       const [fDetail, msgs, audits] = await Promise.all([
         getFarmerDetail(sc.farmerId),
         getMessages({ farmerId: sc.farmerId }),
@@ -98,11 +108,11 @@ export default function SoilCardDetail() {
   }
 
   const isEditable = card.status === 'NEEDS_REVIEW';
-  const blockingCount = card.params.reduce(
-    (acc, p) => acc + p.flags.filter((f) => f.blocking).length,
+  const blockingCount = (card.params ?? []).reduce(
+    (acc, p) => acc + (p.flags ? p.flags.filter((f) => f.blocking).length : 0),
     0,
   );
-  const unconfirmedCount = card.params.filter((p) => !p.confirmed).length;
+  const unconfirmedCount = (card.params ?? []).filter((p) => !p.confirmed).length;
   const canConfirm = blockingCount === 0 && unconfirmedCount === 0;
 
   const handleParamChange = (

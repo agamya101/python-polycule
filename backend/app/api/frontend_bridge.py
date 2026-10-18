@@ -1054,6 +1054,45 @@ def get_soil_cards(farmerId: Optional[str] = None) -> list[dict[str, Any]]:
     return store.soil_cards
 
 
+PARAM_METAS = {
+    "pH": {"label": "Soil pH", "defaultUnit": "–", "min": 3.5, "max": 10.5, "interp": "Optimal neutral soil reaction for most field crops."},
+    "EC": {"label": "Electrical conductivity", "defaultUnit": "dS/m", "min": 0, "max": 20, "interp": "Salinity within normal safe limits for crop growth."},
+    "OC": {"label": "Organic carbon", "defaultUnit": "%", "min": 0.05, "max": 5, "interp": "Low organic matter; nitrogen supplementation advised."},
+    "N": {"label": "Available nitrogen", "defaultUnit": "kg/ha", "min": 50, "max": 1200, "interp": "Available nitrogen is low; follow card fertilizer dose."},
+    "P": {"label": "Available phosphorus", "defaultUnit": "kg/ha", "min": 1, "max": 200, "interp": "Available phosphorus is low; follow card fertilizer dose."},
+    "K": {"label": "Available potassium", "defaultUnit": "kg/ha", "min": 20, "max": 1500, "interp": "Available potassium is adequate."},
+    "S": {"label": "Sulphur", "defaultUnit": "ppm", "min": 0.5, "max": 200, "interp": "Sulphur is below critical threshold; supplementation advised."},
+    "Zn": {"label": "Zinc", "defaultUnit": "ppm", "min": 0.05, "max": 50, "interp": "Zinc is below critical threshold; foliar supplementation advised."},
+    "Fe": {"label": "Iron", "defaultUnit": "ppm", "min": 0.5, "max": 200, "interp": "Iron is above sufficiency threshold."},
+    "Cu": {"label": "Copper", "defaultUnit": "ppm", "min": 0.05, "max": 50, "interp": "Copper is above sufficiency threshold."},
+    "Mn": {"label": "Manganese", "defaultUnit": "ppm", "min": 0.2, "max": 200, "interp": "Manganese is above sufficiency threshold."},
+    "B": {"label": "Boron", "defaultUnit": "ppm", "min": 0.05, "max": 10, "interp": "Boron is above sufficiency threshold."},
+}
+
+
+def normalize_soil_param(p: Any) -> dict[str, Any]:
+    if hasattr(p, "dict"):
+        p = p.dict()
+    elif not isinstance(p, dict):
+        p = dict(p)
+    p_name = p.get("param", "pH")
+    meta = PARAM_METAS.get(p_name, {"label": p_name, "defaultUnit": "–", "min": 0, "max": 1000, "interp": "Evaluated from card."})
+    val = p.get("value")
+    flags = p.get("flags") if isinstance(p.get("flags"), list) else []
+    return {
+        "param": p_name,
+        "label": p.get("label") or meta["label"],
+        "value": val,
+        "unit": p.get("unit") or meta["defaultUnit"],
+        "ocrRaw": str(p.get("ocrRaw") or (val if val is not None else "")),
+        "ocrConfidence": p.get("ocrConfidence", 0.95),
+        "rating": p.get("rating", "ADEQUATE"),
+        "interpretation": p.get("interpretation") or meta["interp"],
+        "flags": flags,
+        "confirmed": p.get("confirmed", False),
+    }
+
+
 @router.post("/soil-cards/ocr")
 async def create_soil_card_ocr(
     farmerId: str = Form(...),
@@ -1124,7 +1163,7 @@ async def create_soil_card_ocr(
         "labName": lab_name,
         "imageUrl": None,
         "status": "CONFIRMED",
-        "params": params,
+        "params": [normalize_soil_param(p) for p in params],
         "recommendations": recs,
         "cardAgeYears": 0.1,
         "ageFlag": False,
@@ -1167,7 +1206,7 @@ def create_soil_card_manual(body: SoilCardManualCreate, x_actor: Optional[str] =
         "labName": body.labName or "Manual Entry",
         "imageUrl": None,
         "status": "CONFIRMED",
-        "params": body.params,
+        "params": [normalize_soil_param(p) for p in (body.params or [])],
         "recommendations": body.recommendations or [],
         "cardAgeYears": 0.1,
         "ageFlag": False,
