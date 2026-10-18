@@ -114,7 +114,7 @@ export default function Overview() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Department Command Center"
+        eyebrow="Command Center · 7-Layer Closed-Loop Governance"
         title="Crop Stress, Soil Health & Resolution Overview"
         description="Unified accountability view across 25 monitored districts, registered farmer parcels, SMS approvals, and 21-day satellite follow-ups."
         badges={

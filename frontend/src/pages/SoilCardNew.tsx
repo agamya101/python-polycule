@@ -325,7 +325,7 @@ export default function SoilCardNew() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="F2 · Soil Health Card 5-Step Wizard"
+        eyebrow="Layer 3 · Soil Health Card 5-Step Wizard"
         title="Scan or Enter Soil Health Card"
         description="Extract 12 soil parameters, verify OCR safeguard flags, convert fertilizer doses to bags/acre, and submit a regional SMS for department approval."
         actions={

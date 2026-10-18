@@ -103,7 +103,7 @@ export default function FarmerDetail() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow={`Farmer Record · ${detail.id}`}
+        eyebrow={`Layer 2 · Farmer Record · ${detail.id}`}
         title={detail.name}
         description={
           <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -295,7 +295,7 @@ export default function FarmerDetail() {
         <div className="lg:col-span-7">
           {detail.soilCard ? (
             <Card
-              eyebrow="F2 · Linked Soil Health Card"
+              eyebrow="Layer 3 · Linked Soil Health Card"
               title={`Card ${detail.soilCard.cardNumber ?? detail.soilCard.id}`}
               actions={
                 <Link
@@ -359,7 +359,7 @@ export default function FarmerDetail() {
             <EmptyState
               icon={<FlaskConical className="w-5 h-5" />}
               title="No Soil Health Card Linked"
-              hint="Scan or enter a Soil Health Card so nutrient deficiencies and bag/acre doses feed into F1 reasoning."
+              hint="Scan or enter a Soil Health Card so nutrient deficiencies and bag/acre doses feed into Layer 1 reasoning."
               action={
                 <Button
                   variant="primary"
@@ -376,7 +376,7 @@ export default function FarmerDetail() {
         <div className="lg:col-span-5">
           {detail.followUp && detail.openCase ? (
             <Card
-              eyebrow="F3 · 21-Day Follow-Up"
+              eyebrow="Layer 6 · 21-Day Follow-Up"
               title={`Case Status: ${detail.openCase.status}`}
               actions={
                 <Link

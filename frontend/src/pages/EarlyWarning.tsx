@@ -275,7 +275,7 @@ export default function EarlyWarning() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="F1 · Satellite Crop-Stress Early Warning"
+        eyebrow="Layer 1 · Satellite Crop-Stress Early Warning"
         title="District Risk Heat Map & Monitored Leaderboard"
         description="MODIS 250 m 8-day NDVI anomalies fused with synoptic weather alerts across 25 districts. Click a district to fly on map; double-click or open report for full multi-agent diagnostic."
         badges={

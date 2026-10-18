@@ -1,4 +1,5 @@
-import { Moon, Sun, UserCheck } from 'lucide-react';
+import { Moon, Settings as SettingsIcon, Sun, UserCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useRole } from '@/auth/RoleContext';
 import { useTheme } from '@/theme/useTheme';
 
@@ -24,6 +25,16 @@ export function TopActions() {
           ))}
         </select>
       </div>
+
+      {/* Settings link */}
+      <Link
+        to="/settings"
+        aria-label="Settings"
+        title="Settings & System Configuration"
+        className="fp-btn fp-btn-ghost p-2"
+      >
+        <SettingsIcon className="w-4 h-4" />
+      </Link>
 
       {/* Light / Dark mode toggle */}
       <button

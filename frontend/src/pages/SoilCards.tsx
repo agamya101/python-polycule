@@ -181,7 +181,7 @@ export default function SoilCards() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="F2 · Soil Health Card Reader & Safeguards"
+        eyebrow="Layer 3 · Soil Health Card Reader & Safeguards"
         title="Soil Health Cards"
         description="12-parameter OCR extraction with decimal-shift and unit-mismatch safeguards, converted to bags/acre, and gated by mandatory Agriculture Department approval."
         actions={

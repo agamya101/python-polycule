@@ -94,7 +94,7 @@ export default function FarmerNew() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Field Registration · Extension Worker"
+        eyebrow="Layer 2 · Field Parcel Registration"
         title="Register Farmer & Field Parcel Polygon"
         description="Register a farmer record and draw their parcel boundary on 10 m satellite imagery. Small-field resolution limits are evaluated live."
         badges={

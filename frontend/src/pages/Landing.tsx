@@ -14,17 +14,17 @@ import { PageHeader } from '@/components/ui/PageHeader';
 const FEATURES = [
   {
     icon: Satellite,
-    title: 'F1 · Crop-Stress Early Warning',
+    title: 'Layer 1 · Crop-Stress Early Warning',
     desc: 'District risk leaderboard (MODIS 250 m NDVI anomaly + weather alerts) paired with Sentinel-2 10 m farmer field polygons and multi-agent reasoning.',
   },
   {
     icon: FlaskConical,
-    title: 'F2 · Soil Health Card Reader',
+    title: 'Layer 3 · Soil Health Card Reader',
     desc: 'OCR extraction of 12 soil parameters with decimal-shift & unit safeguards, converted to bags/acre, and gated by mandatory department approval.',
   },
   {
     icon: Activity,
-    title: 'F3 · 21-Day Follow-up & Resolution',
+    title: 'Layer 6 · 21-Day Follow-up & Resolution',
     desc: 'Post-advisory satellite follow-up, Needs Field Support queue, message reach verification (sent ≠ delivered ≠ acknowledged), and hash-chained audit.',
   },
 ];

@@ -1,6 +1,18 @@
-import { useState, type ReactNode } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { ChevronDown, MoreHorizontal } from 'lucide-react';
+import { useState, useRef, useEffect, type ReactNode } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import {
+  Activity,
+  ChevronDown,
+  FlaskConical,
+  LayoutDashboard,
+  MessageSquareText,
+  MoreHorizontal,
+  Satellite,
+  ScrollText,
+  ShieldCheck,
+  Tractor,
+  Users,
+} from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { BrandLogo } from '@/components/ui/BrandLogo';
 import { NAV_ITEMS, type NavBadgeCounts } from './navItems';
@@ -12,12 +24,39 @@ export interface SarsonLayoutProps {
 }
 
 export function SarsonLayout({ counts, children }: SarsonLayoutProps) {
-  const [moreOpen, setMoreOpen] = useState(false);
+  const location = useLocation();
+  const [layer6Open, setLayer6Open] = useState(false);
   const [mobileSheetOpen, setMobileSheetOpen] = useState(false);
+  const layer6Ref = useRef<HTMLDivElement>(null);
 
-  const primaryItems = NAV_ITEMS.slice(0, 8);
-  const overflowItems = NAV_ITEMS.slice(8); // Audit, Settings
-  const bottomBarRoutes = ['/overview', '/early-warning', '/farmers', '/follow-up'];
+  const isLayer6Active =
+    location.pathname.startsWith('/follow-up') || location.pathname.startsWith('/field-support');
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (layer6Ref.current && !layer6Ref.current.contains(e.target as Node)) {
+        setLayer6Open(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const primaryItems = [
+    { label: 'Command Center', route: '/overview', icon: LayoutDashboard },
+    { label: 'Early Warning', route: '/early-warning', icon: Satellite, badgeKey: 'activeAlerts' as const },
+    { label: 'Farmers', route: '/farmers', icon: Users },
+    { label: 'Soil Cards', route: '/soil-cards', icon: FlaskConical },
+    { label: 'Approvals', route: '/approvals', icon: ShieldCheck, badgeKey: 'pendingApprovals' as const },
+    { label: 'Advisories', route: '/advisories', icon: MessageSquareText },
+  ];
+
+  const layer6Items = [
+    { label: '21-Day Follow-Up', route: '/follow-up', icon: Activity },
+    { label: 'Field Support', route: '/field-support', icon: Tractor, badgeKey: 'needsFieldSupport' as const },
+  ];
+
+  const bottomBarRoutes = ['/overview', '/early-warning', '/farmers', '/follow-up', '/audit'];
   const bottomItems = NAV_ITEMS.filter((i) => bottomBarRoutes.includes(i.route));
 
   return (
@@ -63,45 +102,80 @@ export function SarsonLayout({ counts, children }: SarsonLayoutProps) {
             );
           })}
 
-          {/* More menu for Audit & Settings */}
-          <div className="relative">
+          {/* Layer 6 Dropdown: Follow-up & Field Support */}
+          <div className="relative" ref={layer6Ref}>
             <button
               type="button"
-              onClick={() => setMoreOpen((v) => !v)}
-              className="px-3 py-1.5 rounded-full text-xs font-bold inline-flex items-center gap-1 text-ink hover:bg-surface-2 cursor-pointer"
+              onClick={() => setLayer6Open((v) => !v)}
+              className={cn(
+                'px-3 py-1.5 rounded-full text-xs font-bold inline-flex items-center gap-1.5 transition-transform cursor-pointer',
+                isLayer6Active
+                  ? 'bg-accent text-on-accent shadow-sm'
+                  : 'text-ink hover:bg-surface-2',
+              )}
             >
-              <span>More</span>
-              <ChevronDown className="w-3.5 h-3.5" />
+              <Activity className="w-3.5 h-3.5" />
+              <span>Resolution</span>
+              {counts.needsFieldSupport > 0 && (
+                <span className="px-1.5 py-0.2 rounded-full bg-primary text-on-primary text-[10px] font-mono">
+                  {counts.needsFieldSupport}
+                </span>
+              )}
+              <ChevronDown className={cn('w-3.5 h-3.5 transition-transform', layer6Open && 'rotate-180')} />
             </button>
-            {moreOpen && (
+            {layer6Open && (
               <div
-                onMouseLeave={() => setMoreOpen(false)}
-                className="absolute right-0 mt-2 w-44 fp-card p-1.5 z-40 bg-surface space-y-1"
+                onMouseLeave={() => setLayer6Open(false)}
+                className="absolute left-0 mt-2 w-52 fp-card p-1.5 z-40 bg-surface space-y-1 shadow-lg border border-line"
               >
-                {overflowItems.map((item) => {
+                {layer6Items.map((item) => {
                   const Icon = item.icon;
+                  const badgeVal = item.badgeKey ? counts[item.badgeKey] : 0;
                   return (
                     <NavLink
                       key={item.route}
                       to={item.route}
-                      onClick={() => setMoreOpen(false)}
+                      onClick={() => setLayer6Open(false)}
                       className={({ isActive }) =>
                         cn(
-                          'flex items-center gap-2 px-3 py-2 rounded-ctl text-xs font-bold',
+                          'flex items-center justify-between gap-2 px-3 py-2 rounded-ctl text-xs font-bold transition-colors',
                           isActive
                             ? 'bg-accent text-on-accent'
                             : 'text-ink hover:bg-surface-2',
                         )
                       }
                     >
-                      <Icon className="w-3.5 h-3.5" />
-                      <span>{item.label}</span>
+                      <div className="flex items-center gap-2">
+                        <Icon className="w-3.5 h-3.5" />
+                        <span>{item.label}</span>
+                      </div>
+                      {badgeVal > 0 && (
+                        <span className="px-1.5 py-0.2 rounded-full bg-primary text-on-primary text-[10px] font-mono">
+                          {badgeVal}
+                        </span>
+                      )}
                     </NavLink>
                   );
                 })}
               </div>
             )}
           </div>
+
+          {/* Layer 7: Audit directly in top navbar */}
+          <NavLink
+            to="/audit"
+            className={({ isActive }) =>
+              cn(
+                'px-3 py-1.5 rounded-full text-xs font-bold inline-flex items-center gap-1.5 transition-transform',
+                isActive
+                  ? 'bg-accent text-on-accent shadow-sm'
+                  : 'text-ink hover:bg-surface-2',
+              )
+            }
+          >
+            <ScrollText className="w-3.5 h-3.5" />
+            <span>Audit</span>
+          </NavLink>
         </nav>
 
         <TopActions />

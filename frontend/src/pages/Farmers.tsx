@@ -283,7 +283,7 @@ export default function Farmers() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow="Field-Scale Registry"
+        eyebrow="Layer 2 · Field-Scale Parcel Diagnostics"
         title="Registered Farmer Parcels"
         description="Department registry of farmer field polygons with 10 m Sentinel-2 NDVI/NDWI tracking, boundary verification status, and linked Soil Health Cards."
         badges={

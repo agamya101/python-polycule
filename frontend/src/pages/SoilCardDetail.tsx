@@ -237,7 +237,7 @@ export default function SoilCardDetail() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow={`Soil Health Card · ${card.id}`}
+        eyebrow={`Layer 3 · Soil Health Card · ${card.id}`}
         title={card.cardNumber ?? card.id}
         description={`Sample Date: ${card.sampleDate ?? '—'} (${card.cardAgeYears ?? 0} yrs) · Lab: ${card.labName ?? '—'} · Created by ${card.createdBy}`}
         badges={

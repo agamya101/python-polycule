@@ -196,7 +196,7 @@ export default function DistrictReport() {
   return (
     <div className="space-y-6">
       <PageHeader
-        eyebrow={`District Report · Priority #${district.priorityRank}`}
+        eyebrow={`Layer 1 · District Early Warning Report · Priority #${district.priorityRank}`}
         title={`${district.district}, ${district.state}`}
         description={`Primary Crop: ${report.crop} · Stage: ${report.cropStage} · ~${report.daysToHarvest} days to harvest · KVK Helpline: ${district.kvkContact}`}
         badges={
