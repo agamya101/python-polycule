@@ -105,6 +105,7 @@ export default function SoilCardNew() {
       const dummyFile =
         selectedFile ?? new File(['mock-shc'], 'soil-health-card.jpg', { type: 'image/jpeg' });
       const created = await createSoilCardOcr(selectedFarmer.id, dummyFile);
+      const farmArea = selectedFarmer.field?.areaHa ?? 1.2;
       const normalizedParams = (created.params ?? []).map((p) =>
         evaluateSoilParam(
           p.param,
@@ -115,7 +116,20 @@ export default function SoilCardNew() {
           p.confirmed ?? false,
         ),
       );
-      setCard({ ...created, params: normalizedParams });
+      const normalizedRecs = (created.recommendations ?? []).map((r) =>
+        computeFertilizerRec(
+          {
+            product: r.product as any,
+            productLabel: r.productLabel || r.product,
+            cardDose: r.cardDose,
+            cardDoseUnit: r.cardDoseUnit,
+            timing: r.timing,
+            sourceText: r.sourceText,
+          },
+          farmArea,
+        ),
+      );
+      setCard({ ...created, params: normalizedParams, recommendations: normalizedRecs });
       setSmsLanguage(selectedFarmer.language);
       toast.success('OCR extracted 12 parameters — review safeguard flags before confirming');
       setStep(3);
@@ -149,6 +163,7 @@ export default function SoilCardNew() {
           },
         ],
       });
+      const farmArea = selectedFarmer.field?.areaHa ?? 1.2;
       const normalizedParams = (created.params ?? []).map((p) =>
         evaluateSoilParam(
           p.param,
@@ -159,7 +174,20 @@ export default function SoilCardNew() {
           p.confirmed ?? false,
         ),
       );
-      setCard({ ...created, params: normalizedParams });
+      const normalizedRecs = (created.recommendations ?? []).map((r) =>
+        computeFertilizerRec(
+          {
+            product: r.product as any,
+            productLabel: r.productLabel || r.product,
+            cardDose: r.cardDose,
+            cardDoseUnit: r.cardDoseUnit,
+            timing: r.timing,
+            sourceText: r.sourceText,
+          },
+          farmArea,
+        ),
+      );
+      setCard({ ...created, params: normalizedParams, recommendations: normalizedRecs });
       setSmsLanguage(selectedFarmer.language);
       setStep(3);
     } finally {

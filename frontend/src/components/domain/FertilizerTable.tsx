@@ -143,20 +143,28 @@ export function FertilizerTable({
                     </span>
                   )}
                 </td>
-                <td className="py-2.5 px-3 fp-num">{rec.kgPerHa.toFixed(1)} kg</td>
+                <td className="py-2.5 px-3 fp-num">
+                  {rec.kgPerHa !== undefined && rec.kgPerHa !== null
+                    ? `${rec.kgPerHa.toFixed(1)} kg`
+                    : '—'}
+                </td>
                 <td className="py-2.5 px-3 fp-num font-semibold text-ink">
-                  {rec.kgPerAcre.toFixed(1)} kg
+                  {rec.kgPerAcre !== undefined && rec.kgPerAcre !== null
+                    ? `${rec.kgPerAcre.toFixed(1)} kg`
+                    : '—'}
                 </td>
                 <td className="py-2.5 px-3 fp-num text-ink-muted">
-                  {rec.bagSizeKg !== null ? `${rec.bagSizeKg} kg` : '—'}
+                  {rec.bagSizeKg !== null && rec.bagSizeKg !== undefined ? `${rec.bagSizeKg} kg` : '—'}
                 </td>
                 <td className="py-2.5 px-3 fp-num font-bold text-primary">
-                  {formatBagsDisplay(rec.bagsPerAcre, rec.kgPerAcre)}
+                  {formatBagsDisplay(rec.bagsPerAcre ?? null, rec.kgPerAcre ?? 0)}
                 </td>
                 <td className="py-2.5 px-3 fp-num font-semibold">
-                  {rec.bagsForFarm !== null
-                    ? `${rec.bagsForFarm} bags (${rec.kgForFarm} kg)`
-                    : `${rec.kgForFarm} kg`}
+                  {rec.bagsForFarm !== null && rec.bagsForFarm !== undefined
+                    ? `${rec.bagsForFarm} bags (${rec.kgForFarm ?? 0} kg)`
+                    : rec.kgForFarm !== undefined && rec.kgForFarm !== null
+                      ? `${rec.kgForFarm} kg`
+                      : '—'}
                 </td>
                 <td className="py-2.5 px-3">
                   {editable ? (

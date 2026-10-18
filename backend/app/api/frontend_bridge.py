@@ -1093,6 +1093,38 @@ def normalize_soil_param(p: Any) -> dict[str, Any]:
     }
 
 
+def normalize_fertilizer_rec(r: Any, farm_area: float = 1.2) -> dict[str, Any]:
+    if hasattr(r, "dict"):
+        r = r.dict()
+    elif not isinstance(r, dict):
+        r = dict(r)
+    dose = float(r.get("cardDose", 100.0) or 100.0)
+    unit = str(r.get("cardDoseUnit", "kg/ha") or "kg/ha")
+    kg_per_ha = round(dose, 1) if unit == "kg/ha" else round(dose * 2.4711, 1)
+    kg_per_acre = round(dose, 1) if unit == "kg/acre" else round(kg_per_ha / 2.4711, 1)
+    bag_sizes = {"Urea": 45.0, "DAP": 50.0, "MOP": 50.0, "SSP": 50.0, "NPK_10_26_26": 50.0, "Zinc Sulphate": None}
+    prod = str(r.get("product", "Urea"))
+    bag_size = r.get("bagSizeKg") or bag_sizes.get(prod)
+    bags_per_acre = round((kg_per_acre / bag_size) * 2) / 2 if bag_size else None
+    farm_acres = farm_area * 2.4711
+    kg_for_farm = round(kg_per_acre * farm_acres)
+    bags_for_farm = round((kg_for_farm / bag_size) * 2) / 2 if bag_size else None
+    return {
+        "product": prod,
+        "productLabel": str(r.get("productLabel") or prod),
+        "cardDose": dose,
+        "cardDoseUnit": unit,
+        "kgPerHa": kg_per_ha,
+        "kgPerAcre": kg_per_acre,
+        "bagSizeKg": bag_size,
+        "bagsPerAcre": bags_per_acre,
+        "bagsForFarm": bags_for_farm,
+        "kgForFarm": kg_for_farm,
+        "timing": r.get("timing", "Split application"),
+        "sourceText": r.get("sourceText", f"{prod} @ {dose} {unit}"),
+    }
+
+
 @router.post("/soil-cards/ocr")
 async def create_soil_card_ocr(
     farmerId: str = Form(...),
@@ -1164,7 +1196,7 @@ async def create_soil_card_ocr(
         "imageUrl": None,
         "status": "CONFIRMED",
         "params": [normalize_soil_param(p) for p in params],
-        "recommendations": recs,
+        "recommendations": [normalize_fertilizer_rec(r, farmer.get("field", {}).get("areaHa", 1.2)) for r in recs],
         "cardAgeYears": 0.1,
         "ageFlag": False,
         "extractionMethod": extraction_method,
@@ -1207,7 +1239,7 @@ def create_soil_card_manual(body: SoilCardManualCreate, x_actor: Optional[str] =
         "imageUrl": None,
         "status": "CONFIRMED",
         "params": [normalize_soil_param(p) for p in (body.params or [])],
-        "recommendations": body.recommendations or [],
+        "recommendations": [normalize_fertilizer_rec(r, farmer.get("field", {}).get("areaHa", 1.2)) for r in (body.recommendations or [])],
         "cardAgeYears": 0.1,
         "ageFlag": False,
         "extractionMethod": "MANUAL",

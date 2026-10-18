@@ -71,7 +71,6 @@ export default function SoilCardDetail() {
           p.confirmed ?? false,
         ),
       );
-      setCard({ ...sc, params: normalizedParams });
       const [fDetail, msgs, audits] = await Promise.all([
         getFarmerDetail(sc.farmerId),
         getMessages({ farmerId: sc.farmerId }),
@@ -79,6 +78,21 @@ export default function SoilCardDetail() {
       ]);
       setFarmer(fDetail);
       setSmsLang(fDetail.language);
+      const farmArea = fDetail?.field?.areaHa ?? 1.2;
+      const normalizedRecs = (sc.recommendations ?? []).map((r) =>
+        computeFertilizerRec(
+          {
+            product: r.product as any,
+            productLabel: r.productLabel || r.product,
+            cardDose: r.cardDose,
+            cardDoseUnit: r.cardDoseUnit,
+            timing: r.timing,
+            sourceText: r.sourceText,
+          },
+          farmArea,
+        ),
+      );
+      setCard({ ...sc, params: normalizedParams, recommendations: normalizedRecs });
       const foundMsg =
         msgs.find((m) => m.id === sc.messageId || m.soilCardId === sc.id) ?? null;
       setLinkedMsg(foundMsg);
